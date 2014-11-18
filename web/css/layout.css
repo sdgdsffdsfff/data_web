@@ -131,7 +131,7 @@ body {height: 100%; font-family: Arial, Helvetica, sans-serif; font-size: 13px; 
 	
 	table {border-collapse: collapse;}
 		th,td {padding:8px}
-        div class="contentbox" id="graphs-6"></div>
+        
 		th {background: #E0E0E0 url(/res/image/bg_th.png) repeat-x top; text-shadow: 1px 1px 1px #fff; font-size: 14px;}
 		tr.alt td{background: #F2F2F2 url(/res/image/bg_td_alt.png) repeat-x top; text-shadow: 1px 1px 1px #fff;}
 	
