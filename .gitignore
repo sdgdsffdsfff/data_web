@@ -32,4 +32,4 @@ phpunit.phar
 
 /web/cache
 /web/templates_c
-config.php
+/config.php
