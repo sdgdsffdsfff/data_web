@@ -257,7 +257,7 @@ var DateUtil = function(){
 $(function(){
     Highcharts.setOptions({
 	lang: {
-
+            weekdays:["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],
             rangeSelectorZoom:"选择时间范围：",
             contextButtonTitle : '导出',
             printChart:'打印图表'
@@ -402,6 +402,12 @@ var Helper = function(){
                 footerFormat: '</table>'
 
             },
+            plotOptions: {
+                line: {
+                    
+                    enableMouseTracking: true
+                }
+            },
             series: []
         };
         var settings={};
@@ -466,7 +472,7 @@ var Helper = function(){
             },
             tooltip: {
                 shared: true,
-                xDateFormat: '%Y-%m-%d',
+                xDateFormat: '%Y-%m-%d %A',
                 crosshairs:true,
                 useHTML: true,
                 headerFormat: '<b>{point.key}</b><table>',

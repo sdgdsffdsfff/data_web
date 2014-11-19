@@ -28,8 +28,6 @@ DD_belatedPNG.fix('img, .notifycount, .selected');
 <![endif]-->
 <script type = "text/javascript" src = "{$SITE_PREFIX}/js/functions.js"></script>
 <script src="{$SITE_PREFIX}/js/helper.js" type="text/javascript"></script>
-<script type = "text/javascript" src = "{$SITE_PREFIX}/js/data.func.js"></script>
-<script type = "text/javascript" src = "{$SITE_PREFIX}/js/convert_name.js"></script>
 
 <script language="javascript">
 {if isset($user) && $user }

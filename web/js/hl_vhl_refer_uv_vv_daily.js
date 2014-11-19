@@ -14,9 +14,7 @@ function parse_page(req, msg){
             case 7:
             case 30:    
                 response = Helper.groupMsg(msg,'refer',['stat_date','uv','uv_compare','vv','vv_compare']);
-                options.tooltip = {
-                    xDateFormat:'%Y-%m-%d'
-                };
+                
                 break;
         }
         options.series = Helper.getGroupDataSeriesOptions(response, name);
