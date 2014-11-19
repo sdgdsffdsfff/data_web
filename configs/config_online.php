@@ -1,6 +1,6 @@
 <?php
 define('AUTH_ENABLE', 1);
-define('DOMAIN', 'datalocal.ku6.com');
+define('DOMAIN', 'data.ku6.com');
 define('CODE_BASE', dirname(__FILE__) . "/../");
 
 //数据平台user及权限数据库
