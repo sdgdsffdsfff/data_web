@@ -20,9 +20,9 @@ class TrendController extends BaseController {
      */
     public function in_vv_hour(){
         $params = $this->get_param_from_all([
-            'd_offset' => 30, 
-            'stat_date' => 'ASC', 
-            'stat_hour'=>'ASC'
+            'd_offset' => 0, 
+            'stat_date' => 'DESC', 
+            'stat_hour'=>'DESC'
         ]);
         echo $this->format_obj_response($this->trendModel->in_vv_hour($params['d_offset'], $params['stat_date'], $params['stat_hour']));
     }

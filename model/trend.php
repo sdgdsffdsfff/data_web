@@ -23,11 +23,20 @@ class TrendModel
     }
     
     //站内vv时报数据
-    public function in_vv_hour($d_offset = 30, $stat_date = 'ASC', $stat_hour = 'ASC')
+    public function in_vv_hour($d_offset = 0, $stat_date = 'ASC', $stat_hour = 'ASC')
     {
         $d_offset = intval($d_offset);
         if($d_offset < 0 || $d_offset > 90)
-            $d_offset = 30;
+            $d_offset = 0;
+        switch($d_offset){
+            case 0:
+            case 1:
+                $compareChar = '=';
+                break;
+            default :
+                $compareChar = '>=';
+                break;
+        }
         $orderOptions = ['ASC','DESC','asc','desc'];
         if(!in_array($stat_date, $orderOptions) || !in_array($stat_date, $orderOptions)){
             return [];
@@ -36,7 +45,7 @@ class TrendModel
             SELECT DATE_FORMAT(stat_date, '%Y-%m-%d') as stat_date, stat_hour,
             ifnull(vv_yesterday,0) as vv_yesterday, ifnull(vv,0) as vv, ifnull(concat(round(vv_compare/100,2),' %'),0)  as vv_compare,
             ifnull(uv_yesterday,0) as uv_yesterday, ifnull(uv,0) as uv, ifnull(uv,0) as uv, ifnull(concat(round(uv_compare/100,2),' %'),0) as uv_compare
-            from ku6_report_hour where stat_date >= DATE_ADD(current_date(), INTERVAL -{$d_offset} day) 
+            from ku6_report_hour where stat_date {$compareChar} DATE_ADD(current_date(), INTERVAL -{$d_offset} day) 
             order by stat_date {$stat_date}, stat_hour {$stat_hour};
 EOF;
         return $this->getResult($sql);
