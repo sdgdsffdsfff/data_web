@@ -9,7 +9,7 @@ function parse_page(req, msg){
         $.each(msg.response, function(k, ele){
             var d = DateUtil.strToDate(ele.stat_date + ' '+ele.stat_hour);
             var timestamp = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours());
-            data.push([timestamp, ele[name]]);
+            data.push({x:timestamp, y:ele[name], compare:ele[name+'_compare']});
             if(ele.stat_hour == 0){
                 options.xAxis.plotLines.push({
                     value : timestamp,
