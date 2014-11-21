@@ -69,6 +69,7 @@ function ldap_auth($username, $passwd){
     $output = curl_exec($ch) ;  
     curl_close($ch);
     $result = @json_decode($output, true);
+    //print_r($result);exit;
     if(isset($result['status'])){
         switch ($result['status']) {
             case 1:

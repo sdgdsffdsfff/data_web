@@ -53,18 +53,18 @@ class UserController extends BaseController
     public function web_login(){
         // TODO: 这里我没校验两个值是否有注入的风险，SDO啊，都靠你们了啊 :P
         // 靠我们吧, 依赖basecontroller
-        $username = $this->_app->request()->post("username");
+        $email = $this->_app->request()->post("username");
         $password = $this->_app->request()->post("password");
-        if(!$username || !$password) return $this->_app->redirect(SITE_PREFIX . "login");
+        if(!$email || !$password) return $this->_app->redirect(SITE_PREFIX . "login");
         
         $realip = $this->_app->request()->getIp();
-        if(!strpos($username, "@ku6.com")){
+        if(!strpos($email, "@ku6.com")){
             $_SESSION['errmsg'] = '请使用全帐号(eg:username@ku6.com)';
             return $this->_app->redirect(SITE_PREFIX . 'login');
         }
        
-        
-        if($this->login($username, $password, $realip, 1)){
+        $names = explode('@', $email);
+        if($this->login($names[0], $password, $realip, 1)){
             $this->_app->redirect(SITE_PREFIX . 'admin/welcome');
         } else {
             $_SESSION['errmsg'] = '登录失败';
@@ -77,14 +77,14 @@ class UserController extends BaseController
         $this->_app->redirect(SITE_PREFIX . 'login');
     }
     
-    public function api_login( $web = 0, $snda = 0){
+    public function api_login(){
         $params = array('username' => '', 'password' => '', 'param_ip' => '');
         $params = $this->get_param_from_all($params);
-        return $this->login($params['username'], $params['password'], $params['param_ip'], $web, $snda);
+        return $this->login($params['username'], $params['password'], $params['param_ip'], 0);
     }
     
     public function login($username, $password, $ip, $web = 0){
-        if(ldap_auth($username, $password)){
+        if(ldap_auth($username.'@ku6.com', $password)){
             //get & update last_login information
             $user_id = $this->user_model->get_update_login_info($username, $ip);
             if($user_id == 0){ 

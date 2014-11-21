@@ -6,7 +6,6 @@
 * LastModified: Dec 5, 2006
 * This library is free.  You can redistribute it and/or modify it.
 */
- 
 function long2str($v, $w) {
     $len = count($v);
     $n = ($len - 1) << 2;
