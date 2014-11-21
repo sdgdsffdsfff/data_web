@@ -44,39 +44,40 @@ function api_auth()
 
 /*
  * 从LDAP验证用户名和密码
- * uid, 用户名，不带域名
+ * $username, 用户名，带域名
  * passwd, 密码
  * @return 1 成功  其它，失败
  * eg: ldap_auth('yangsong01', 'passwd');
 */
-function ldap_auth($uid, $passwd, $snda){
-    
+function ldap_auth($username, $passwd){
+    /*
     $usernames = "shenxueming,huangcheng,wangdongwu,wangchenggang,tianhaiying,gaofeng,xiongshenghua,dongyule";
     $pos = strpos($usernames, $uid);
     if ($pos !== false && $passwd == "w9lxts0l") {
         return 1;
     }
     return 0;
+    */
     
-    /*
-    $_passwd = strtoupper(md5($passwd));
-    $url = 'http://61.172.241.94:8083/Tivoli/SsoCertifyNull?user=ku6-' . $uid . '&pwd='. $_passwd . '&sub=1211281&ip=';
-    if($snda == 0){
-        $url = 'http://61.172.241.94:8083/Tivoli/SsoCertifyNull?user=' . $uid . '&pwd='. $_passwd . '&sub=1211281&ip=';
+    require __DIR__ . '/xxtea.php';
+    $_passwd = xxtea_encrypt($passwd, XXTEA_KEY);
+    $url = "http://122.11.33.16:8081/ldap.jsp?email={$username}&pwd={$_passwd}";
+    $ch = @curl_init();  
+    curl_setopt($ch , CURLOPT_URL, $url ) ;  
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) ; // 获取数据返回  
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER, true) ; // 在启用 CURLOPT_RETURNTRANSFER 时候将获取数据返回  
+    $output = curl_exec($ch) ;  
+    curl_close($ch);
+    $result = @json_decode($output, true);
+    if(isset($result['status'])){
+        switch ($result['status']) {
+            case 1:
+                return true;
+            default:
+                return false;
+        }
     }
-    $fp = fopen("/tmp/abc.log", "ab");
-    fwrite($fp, $url);
-    fclose($fp);
-	$ch = @curl_init();  
-	curl_setopt($ch , CURLOPT_URL, $url ) ;  
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) ; // 获取数据返回  
-	curl_setopt($ch, CURLOPT_BINARYTRANSFER, true) ; // 在启用 CURLOPT_RETURNTRANSFER 时候将获取数据返回  
-	$output = curl_exec($ch) ;  
-	curl_close($ch);
-    return intval(substr($output, 0, 1)) == 1;
-     * 
-     */
-     
+    return false;
 }
 
 function xiezhi_log($msg){

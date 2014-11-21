@@ -58,16 +58,13 @@ class UserController extends BaseController
         if(!$username || !$password) return $this->_app->redirect(SITE_PREFIX . "login");
         
         $realip = $this->_app->request()->getIp();
-        if(!strpos($username, "@")){
-            $_SESSION['errmsg'] = '请使用全帐号(eg:yangsong01@snda.com)';
+        if(!strpos($username, "@ku6.com")){
+            $_SESSION['errmsg'] = '请使用全帐号(eg:username@ku6.com)';
             return $this->_app->redirect(SITE_PREFIX . 'login');
         }
-        $login_as_snda = 0;
-        $names = explode('@', $username);
-        if(trim($names[1]) == "ku6.com"){
-            $login_as_snda = 1;
-        }
-        if($this->login($names[0], $password, $realip, 1, $login_as_snda)){
+       
+        
+        if($this->login($username, $password, $realip, 1)){
             $this->_app->redirect(SITE_PREFIX . 'admin/welcome');
         } else {
             $_SESSION['errmsg'] = '登录失败';
@@ -86,8 +83,8 @@ class UserController extends BaseController
         return $this->login($params['username'], $params['password'], $params['param_ip'], $web, $snda);
     }
     
-    public function login($username, $password, $ip, $web = 0, $snda = 0){
-        if(ldap_auth($username, $password, $snda)){
+    public function login($username, $password, $ip, $web = 0){
+        if(ldap_auth($username, $password)){
             //get & update last_login information
             $user_id = $this->user_model->get_update_login_info($username, $ip);
             if($user_id == 0){ 
