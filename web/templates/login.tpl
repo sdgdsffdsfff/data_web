@@ -14,10 +14,11 @@
 </head>
 <body >
 <div id="logincontainer">      
-
+<!--
 <div class="status warning" id="bbrowser" >
 <p><img src="/res/image/icons/icon_warning.png" alt="Warning"><span>注意</span> 为了更好的展示和压缩成本，本系统不支持IE7以下的浏览器.</p>
 </div>
+-->
 
 {if $error != ""}
 <div class="status error">
