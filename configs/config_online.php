@@ -28,7 +28,7 @@ date_default_timezone_set('Asia/Chongqing') ;
 define("MAIL_NAME", "data_monitor@sohu.com");
 define("MAIL_PASS", "kU^M@lL*M0N1T0$");
 define("MAIL_SMTP", "smtp.sohu.com");
-define("XXTEA_KEY", "ku6.corp");
+define("XXTEA_KEY", "ku6data!@#123");
 
 $MODULES = array(
 
