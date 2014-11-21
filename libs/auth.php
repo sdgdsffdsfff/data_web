@@ -61,6 +61,9 @@ function ldap_auth($username, $passwd){
     
     require __DIR__ . '/xxtea.php';
     $_passwd = base64_encode(xxtea_encrypt($passwd, XXTEA_KEY));
+    $_passwd = str_replace('+', '-', $_passwd);
+    $_passwd = str_replace('/', '_', $_passwd);
+    $_passwd = str_replace('=', '.', $_passwd);
     $url = "http://122.11.33.16:8081/ldap.jsp?email={$username}&pwd={$_passwd}";
     $ch = @curl_init();  
     curl_setopt($ch , CURLOPT_URL, $url ) ;  
