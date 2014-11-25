@@ -177,11 +177,13 @@ class WebReportsController extends WebController{
         if(count($privates)) $um->add_privilege($uid, $privates);
         $row = array('gid' => $val['grouplevel']);
         $um->updateuser($row, $uid);
-        //更新SESSION
-        $report_ids = $um->get_privilege($uid);
-        $urls = $um->get_privilege_url($uid);
-        $_SESSION['report_ids'] = $report_ids;
-        $_SESSION['url'] = $urls;
+        //更新自己的SESSION
+        if($_SESSION['uid'] == $uid){
+            $report_ids = $um->get_privilege($uid);
+            $urls = $um->get_privilege_url($uid);
+            $_SESSION['report_ids'] = $report_ids;
+            $_SESSION['url'] = $urls;
+        }
         
         return $this->_app->redirect(SITE_PREFIX . "admin/usersmanager");
     }

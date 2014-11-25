@@ -101,6 +101,7 @@ class UserController extends BaseController
             if(!isset($_SESSION)){
                 session_start();
             }
+            $_SESSION['uid'] = $user_id;
             $_SESSION['username'] = $username;
             $_SESSION['token'] = $token;
             $_SESSION['report_ids'] = $report_ids;
