@@ -125,7 +125,7 @@ class WebController extends BaseController
             }
         }
         $menu = array_merge($menu, $top_level);
-        usort($menu, array('WebController', 'sort_key'));
+        //usort($menu, array('WebController', 'sort_key'));
         return $menu;
     }
 

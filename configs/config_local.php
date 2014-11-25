@@ -7,7 +7,8 @@ define('CODE_BASE', dirname(__FILE__) . "/../");
 $mysql_config = array('host' => '122.11.33.16', 'port' => 3306, 'user' => 'root', 'password' => '123123', 'database' => 'data_web', 'charset' => 'utf8', 'persistent' => true);
 //数据平台统计数据
 $mysql_data_config = array('host' => '122.11.32.175', 'port' => 3310, 'user' => 'ku6_report', 'password' => 'ku6@963147!@#$pwd', 'database' => 'ku6_report', 'charset' => 'utf8', 'persistent' => true);
-
+//utcc
+$mysql_utcc_config = array('host' => '122.11.45.195', 'port' => 3317, 'user' => 'kou', 'password' => 'Ku6@oss.com', 'database' => 'new_utcc', 'charset' => 'utf8', 'persistent' => true);
 $memcache_host = array(array('host' => '122.11.33.113', 'port' => 11211));
 
 define("DEV", 1);

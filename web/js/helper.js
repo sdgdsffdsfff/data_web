@@ -486,7 +486,11 @@ var Helper = function(){
                 layout: 'vertical',
                 align: 'right',
                 verticalAlign: 'middle',
-                borderWidth: 0
+                borderWidth: 0,
+                itemMarginBottom:5,
+                itemHiddenStyle: {
+                    color: '#666'
+                }
             },
             series: []
         };
@@ -533,6 +537,56 @@ var Helper = function(){
                         connectorColor: '#000000',
                         format: '<b>{point.name}</b>:{point.percentage:.1f} %'
                     }
+                }
+            },
+            series: []
+        };
+        var settings = {};
+        $.extend(true, settings, defaults, options);
+        $('#'+container).highcharts(settings);
+    };
+    
+    this.drawColumnChar = function(container, title, options){
+        var defaults ={
+            chart: {
+                type: 'column'
+            },
+            credits: {
+                    enabled: false
+            },
+            exporting:{
+                    enabled:false
+            },
+            legend: {
+                enabled: false
+            },
+            title: {
+                text: title
+            },
+            subtitle: {
+                text: 'Source: data.ku6.com'
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '数量 (个)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<b>{point.key}</b><table>',
+                pointFormat: '<tr><td style="color:{series.color};">{series.name}: </td>' +
+                    '<td><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: false,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
                 }
             },
             series: []
@@ -589,7 +643,7 @@ var Helper = function(){
         tableHtml += '</table>';
         
         var Table = jQuery(tableHtml);
-        jQuery("#" + container).append(Table);
+        jQuery("#" + container).html(Table);
     };
     
     

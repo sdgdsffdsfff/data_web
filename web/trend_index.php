@@ -10,7 +10,7 @@ foreach($controllers as $key){
 }
 //ku6站内VV时报
 $app->get('/trend/in_vv_hour', function () use($app) {
-        $hl = new TrendController($app);
+        $hl = new WebTrendController($app);
         $hl->in_vv_hour();
 });
 

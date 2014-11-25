@@ -53,6 +53,7 @@ if(DEV == 1){
 require_once("admin_index.php");
 require_once("hl_index.php");
 require_once("trend_index.php");
+require_once("utcc_index.php");
 
 $app->run();
 

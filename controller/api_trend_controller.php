@@ -5,7 +5,7 @@ if(!defined("CODE_BASE")){
 require_once(CODE_BASE . 'controller/base.php');
 require_once(CODE_BASE . 'model/trend.php');
 
-class TrendController extends BaseController {
+class ApiTrendController extends BaseController {
     public $trendModel;
     public function __construct($app)
     {
