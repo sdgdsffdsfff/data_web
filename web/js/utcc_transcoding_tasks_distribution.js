@@ -19,8 +19,8 @@ function parse_page(req,msg){
         colorByPoint: true,
         dataLabels: {enabled: false}
     });
-    Helper.drawColumnChar('graphs-realtime-num', '转码任务状态分布(每隔30s自动更新)', options);
-    Helper.drawTable('tables-realtime-num', '转码任务状态分布(每隔30s自动更新)', msg);
+    Helper.drawColumnChar('graphs-realtime-num', '今日转码任务状态分布(每隔30s自动更新)', options);
+    Helper.drawTable('tables-realtime-num', '今日转码任务状态分布(每隔30s自动更新)', msg);
 };
 
 $(function(){

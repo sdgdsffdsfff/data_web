@@ -20,7 +20,7 @@
             </div>
         </div>
         <div id="footer">
-            &copy; Copyright 2012 Snda.com
+            &copy; Copyright {date('Y')} ku6.com
         </div>
     </div>
 <script src="{$SITE_PREFIX}/js/hl_vhl_channel_daily.js" type="text/javascript"></script>

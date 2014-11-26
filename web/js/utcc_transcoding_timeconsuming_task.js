@@ -1,6 +1,6 @@
 function parse_page(req,msg){
     
-    Helper.drawTable('tables-realtime-num', '转码耗时的任务(每隔30s自动更新)', msg);
+    Helper.drawTable('tables-realtime-num', '今日转码耗时的任务(每隔30s自动更新)', msg);
 };
 
 $(function(){

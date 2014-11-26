@@ -17,7 +17,7 @@ function parse_page(req,msg){
         colorByPoint: true,
         dataLabels: {enabled: true}
     });
-    Helper.drawColumnChar('graphs-realtime-num', '上传视频状态分布(每隔30s自动更新)', options);
+    Helper.drawColumnChar('graphs-realtime-num', '今日上传视频状态分布(每隔30s自动更新)', options);
 };
 
 $(function(){
