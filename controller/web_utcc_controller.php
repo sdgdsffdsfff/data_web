@@ -40,4 +40,7 @@ class WebUtccController extends WebController
     public function today_video_upload_source_distribution(){
         echo $this->gene_default_display('今日视频上传来源分布', 'utcc/today_video_upload_source_distribution.tpl');
     }
+    public function transcoding_fails_task_distribution(){
+        echo $this->gene_default_display('转码失败任务状态分布', 'utcc/transcoding_fails_task_distribution.tpl');
+    }
 }

@@ -53,3 +53,9 @@ $app->get('/utcc/today_video_upload_source_distribution', function () use($app) 
         $c = new WebUtccController($app);
         $c->today_video_upload_source_distribution();
 });
+
+//转码失败任务状态分布
+$app->get('/utcc/transcoding_fails_task_distribution', function () use($app) {
+        $c = new WebUtccController($app);
+        $c->transcoding_fails_task_distribution();
+});

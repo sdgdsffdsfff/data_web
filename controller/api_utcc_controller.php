@@ -54,4 +54,8 @@ class ApiUtccController extends BaseController
        
         echo $this->format_obj_response($this->utccModel->today_video_upload_source_distribution());
     }
+    public function transcoding_fails_task_distribution(){
+       
+        echo $this->format_obj_response($this->utccModel->transcoding_fails_task_distribution());
+    }
 }

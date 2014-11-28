@@ -48,9 +48,14 @@ $app->get('/utcc/dispatch_timeconsuming_task', function () use($app) {
         $hl = new ApiUtccController($app);
         $hl->dispatch_timeconsuming_task();
 });
-//分发耗时的任务
+//今日视频上传来源分布
 $app->get('/utcc/today_video_upload_source_distribution', function () use($app) {
         $hl = new ApiUtccController($app);
         $hl->today_video_upload_source_distribution();
+});
+//转码失败任务状态分布
+$app->get('/utcc/transcoding_fails_task_distribution', function () use($app) {
+        $hl = new ApiUtccController($app);
+        $hl->transcoding_fails_task_distribution();
 });
 

@@ -111,6 +111,16 @@ EOF;
 EOF;
         return $this->getResult($sql);
     }
+    
+    public function transcoding_fails_task_distribution()
+    {
+        $sql = <<<EOF
+            SELECT transcode_server, COUNT(1) AS cnt
+            FROM Task WHERE task_create_time > date_format(current_date(),'%Y-%m-%d %H:%i:%s') AND transcode_status = 3
+            GROUP BY transcode_server ORDER BY cnt DESC
+EOF;
+        return $this->getResult($sql);
+    }
 
 }    
 
