@@ -32,4 +32,5 @@ phpunit.phar
 
 web/cache/
 web/templates_c/
+configs/
 config.php
