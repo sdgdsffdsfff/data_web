@@ -22,7 +22,7 @@ var dtGridColumns = [
     {id:'trafficIn', title:'下行流量', type:'string', columnClass:'text-center'},
     {id:'trafficOut', title:'上行流量', type:'string', columnClass:'text-center'},
     {id:'badproc', title:'故障进程', type:'string', columnClass:'text-center'},
-    {id:'lastUptime', title:'更新时间', type:'date', format:'yyyy-MM-dd hh:mm:ss', otype:'time_stamp_s', columnClass:'text-center',  fastQuery:true, fastQueryType:'ge'},
+    {id:'lastUptime', title:'更新时间', type:'date', format:'yyyy-MM-dd hh:mm:ss', otype:'string', columnClass:'text-center',  fastQuery:true, fastQueryType:'ge'},
     {id:'clientVersion', title:'客户端版本', type:'string', columnClass:'text-center'},
     {id:'status', title:'状态', type:'number', columnClass:'text-center'}
 ];
@@ -40,6 +40,6 @@ $(function(){
         grid.load();
         setInterval(function(){
             grid.load();
-        },6000);
+        },120000);
 });
 
