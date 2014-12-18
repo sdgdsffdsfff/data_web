@@ -37,15 +37,28 @@ if(AUTH_ENABLE == 1)
     $app->hook('slim.before.dispatch', 'web_auth');
 }
 
+//json api 返回格式设置
+$res_format = [
+    'meta' => ['status' => 404, 'msg' => 'default segment'], 
+    'response' => []
+];
+
 $mysql_db = new Db_Mysql($mysql_config);
-$app->config(array( 'mysql_db' => $mysql_db, 'view' => $smarty, 'LANG' => $LANG));
+$mysql_machineMonitor_db = new Db_Mysql($mysql_machineMonitor_config);
+$app->config([
+    'mysql_db' => $mysql_db,
+    'mysql_machineMonitor_db'=>$mysql_machineMonitor_db,
+    'view' => $smarty,
+    'LANG' => $LANG,
+    'resp' => $res_format
+]);
 
 if(DEV == 1){
     $smarty->caching = false;
     $smarty->debugging = false;
     $app->config('debug', true);
 } else {
-    $smarty->caching = false;
+    $smarty->caching = true;
     $smarty->debugging = false;
     $app->config('debug', false);
 }
@@ -54,6 +67,7 @@ require_once("admin_index.php");
 require_once("hl_index.php");
 require_once("trend_index.php");
 require_once("utcc_index.php");
+require_once("machine_index.php");
 
 $app->run();
 

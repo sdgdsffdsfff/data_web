@@ -46,14 +46,14 @@ abstract class BaseController
         return $keys;
     }
 
-    protected function format_error_response($errorid)
+    protected function format_error_response($errorid=0)
     {
         $resp = $this->_app->config('resp');
-        $ERROR_MATRIX = $this->_app->config('errs');
+        //$ERROR_MATRIX = $this->_app->config('errs');
         $resp['meta']['status'] = 404;
-        $resp['meta']['msg'] = $ERROR_MATRIX[strval($errorid)];
-        $resp['response'] = array();
-        return $resp;
+        //$resp['meta']['msg'] = $ERROR_MATRIX[strval($errorid)];
+        $resp['response'] = [];
+        return json_encode($resp);
     }
     
     protected function format_obj_response($data)

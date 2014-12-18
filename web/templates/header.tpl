@@ -9,23 +9,16 @@
 <title>{$title}</title>
 
 <link type = "text/css" rel = "stylesheet" media = "screen" href="{$SITE_PREFIX}/css/layout.css">
-<link type = "text/css" rel = "stylesheet" media = "screen" href="{$SITE_PREFIX}/css/wysiwyg.css">
 <link type = "text/css" rel = "stylesheet" media = "screen" href="{$SITE_PREFIX}/css/themes/green/styles.css">
 
 <script src="{$SITE_PREFIX}/js/libs/jquery.min.js" type="text/javascript"></script> 
 <script src="{$SITE_PREFIX}/js/libs/Highstock-2.0.3/highstock.js" type="text/javascript"></script>
 <script src="{$SITE_PREFIX}/js/libs/Highstock-2.0.3/modules/exporting.js" type="text/javascript"></script>
-<script type = "text/javascript" src = "{$SITE_PREFIX}/js/libs/jquery.wysiwyg.js"></script>
 <script type = "text/javascript" src = "{$SITE_PREFIX}/js/libs/jquery.flip.min.js"></script>
 <script type = "text/javascript" src = "{$SITE_PREFIX}/js/libs/visualize.jQuery.js"></script>
 <script type = "text/javascript" src = "{$SITE_PREFIX}/js/libs/jquery-ui-1.8.5.custom.min.js"></script>
 <script type = "text/javascript" src = "{$SITE_PREFIX}/js/libs/heartcode-canvasloader-min-0.9.1.js"></script>
-<!-- [if IE 6]>
-<script type = "text/javascript" src = "{$SITE_PREFIX}/js/libs/png_fix.js"></script>
-<script type = "text/javascript">
-DD_belatedPNG.fix('img, .notifycount, .selected');
-</script>
-<![endif]-->
+
 <script type = "text/javascript" src = "{$SITE_PREFIX}/js/functions.js"></script>
 <script src="{$SITE_PREFIX}/js/helper.js" type="text/javascript"></script>
 

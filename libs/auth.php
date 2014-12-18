@@ -16,6 +16,7 @@ function web_auth(){
     if($url == "logout") return true;
     if(strpos($url, 'user') >0 && in_array('admin/usersmanager', $_SESSION['url'])) return true;
     if(strpos($url, 'report') >0 && in_array('admin/reportsmanager', $_SESSION['url'])) return true;
+    if(strpos($url, 'machine') !== false && in_array('machine/manager', $_SESSION['url'])) return true;
     if(!isset($_SESSION['url']) || !in_array($url, $_SESSION['url'])){
         return $app->halt('401', 'Not Authorized <a href=' . SITE_PREFIX . '/login>Login</a>');
     }

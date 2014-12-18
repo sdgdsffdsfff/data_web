@@ -28,14 +28,23 @@ $mysql_data_db = new Db_Mysql($mysql_data_config);
 $mysql_utcc_db = new Db_Mysql($mysql_utcc_config);
 
 //json api 返回格式设置
-$res_format = array('meta' => array('status' => 404, 'msg' => 'default segment'), 'response' => array());
+$res_format = [
+    'meta' => ['status' => 404, 'msg' => 'default segment'], 
+    'response' => []
+];
 
 //设置应用参数
-$app->config(array('mysql_db' => $mysql_db,'mysql_data_db'=>$mysql_data_db, 'mysql_utcc_db'=>$mysql_utcc_db, 'resp' => $res_format));
+$app->config([
+    'mysql_db' => $mysql_db,
+    'mysql_data_db'=>$mysql_data_db, 
+    'mysql_utcc_db'=>$mysql_utcc_db, 
+    'resp' => $res_format
+]);
 
 require_once("hl_index.php");
 require_once("trend_index.php");
 require_once("utcc_index.php");
+require_once("machine_index.php");
 
 $app->get('/test', function () use($app) {
     //var_dump($app->request()->get('xx'));

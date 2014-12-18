@@ -411,6 +411,9 @@ class Db_Mysql
         return mysql_errno($this->_connection);
     }
     
+    public function getConnection() {
+        return $this->_connection;
+    }
+    
 }
 
-?>
