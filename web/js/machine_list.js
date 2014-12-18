@@ -1,4 +1,4 @@
-var sex = {1:'男', 2:'女'};
+var ignored = {0:'NO', 1:'YES'};
 var degree = {1:'小学', 2:'初中', 3:'高中', 4:'中专', 5:'大学', 6:'硕士', 7:'博士', 8:'其他'};
 var dtGridColumns = [
     
@@ -11,14 +11,14 @@ var dtGridColumns = [
     {id:'coreNum', title:'内核数', type:'number', columnClass:'text-center', hideType:'lg|md|sm|xs'},
     {id:'memSum', title:'内存', type:'number', columnClass:'text-center', hideType:'lg|md|sm|xs'},
     {id:'diskSum', title:'硬盘', type:'number', columnClass:'text-center', hideType:'lg|md|sm|xs'},
-    {id:'ignored', title:'ignored', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
+    {id:'ignored', title:'忽略监控', type:'number', columnClass:'text-center', codeTable:ignored, fastQuery:true, fastQueryType:'eq'},
     {id:'descs', title:'描述', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
     {id:'processList', title:'进程列表', type:'string', columnClass:'text-center'},
     {id:'userID', title:'用户ID', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
     {id:'id', title:'操作', type:'number',columnClass:'text-center' ,resolution:function(record, value){
 	        var content = '';
                     
-	            content += '<a class="delete_machine" data-ip="'+record.ip+'"  data-id="'+value+'">删除</a> | <a class="edit_machine" data-id="'+value+'">修改</a>';
+	            content += '<a href="/web/machine/delete?id='+value+'&ip='+record.ip+'">删除</a>';
 	        
 	        return content;
 	    }}
@@ -30,29 +30,13 @@ var dtGridOption = {
         columns : dtGridColumns,
         gridContainer : 'dtGridContainer',
         toolbarContainer : 'dtGridToolBarContainer',
-
-        pageSize : 2
+        pageSize : 20
 };
 var grid = $.fn.DtGrid.init(dtGridOption);
 $(function(){
         grid.load();
-        $('.delete_machine').live('click',function(){
-            var id = $(this).data('id');
-            var ip = $(this).data('ip');
-            $.ajax({
-                type: "get",
-                dataType: "json",
-                url: '/web/machine/delete',
-                cache: false,
-                data : {id:id,ip:ip},
-                success: function(msg){
-
-                    if(msg.meta.status == 200)
-                       grid.reload();
-                    else
-                        alert('操作失败');
-                }
-            });
+        $('#add_machine_submit').live('click',function(){
+            $('#add_machine_form').submit();
         });
 });
 

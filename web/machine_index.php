@@ -19,9 +19,25 @@ $app->map('/machine/list', function () use($app) {
         $c->actionList();
 })->via('GET', 'POST');
 
+//机器添加
+$app->post('/machine/add', function () use($app) {
+        $c = new WebMachineController($app);
+        $c->actionAdd();
+});
+
 //机器删除
 $app->get('/machine/delete', function () use($app) {
         $c = new WebMachineController($app);
         $c->actionDelete();
 });
 
+//监控报表
+$app->get('/machine/monitor', function () use($app) {
+        $c = new WebMachineController($app);
+        $c->actionMonitor();
+});
+
+$app->map('/machine/monitor_list', function () use($app) {
+        $c = new WebMachineController($app);
+        $c->actionMonitorList();
+})->via('GET', 'POST');

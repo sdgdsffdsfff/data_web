@@ -7,7 +7,7 @@
     </div>
     <div class="contentbox" id="table">
         <div>
-            <iframe style="border:0px;" src="{$SITE_PREFIX}machine/list" height="900px" width="100%"></iframe>
+            <iframe style="border:0px;" src="{$SITE_PREFIX}machine/monitor_list" height="900px" width="100%"></iframe>
         </div>
 
     </div>

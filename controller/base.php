@@ -141,6 +141,7 @@ class WebController extends BaseController
         if(isset($_SESSION['username']) && isset($_SESSION['token'])) {
             $smarty->assign('user', $_SESSION['username']);
             $smarty->assign('token', $_SESSION['token']);
+            
         }
         if(is_array($params)){
             foreach($params as $key => $value){

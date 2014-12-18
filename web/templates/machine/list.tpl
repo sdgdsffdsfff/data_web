@@ -31,6 +31,12 @@
 <body>
 	
     <div>
+        {if $error != ""}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>Error!</strong> {$error}
+        </div>
+        {/if}
         <div><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" type="button">添加机器</button></div>
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" >
@@ -39,7 +45,7 @@
                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                         <h4 class="modal-title">添加机器</h4>
                     </div>
-                    <form>	
+                    <form action="{$SITE_PREFIX}machine/add" method="post" id="add_machine_form">	
                         <div class="modal-body form-horizontal">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-right">机器名称：</label>
@@ -80,9 +86,14 @@
                                 <div class="col-sm-4"><input type="text" placeholder="请输入硬盘" name="diskSum" class="form-control"></div>
                             </div>
                             
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label text-right">ignored：</label>
-                                <div class="col-sm-4"><input type="text" placeholder="请输入ignored" name="ignored" id="ignored" class="form-control"></div>
+                            <div class="form-group">	
+                                <label class="col-sm-3 control-label text-right">忽略监控：</label>
+                                <div class="col-sm-4">	
+                                    <select name="ignored"  class="form-control">
+                                        <option value="0">NO</option>
+                                        <option value="1">YES</option>	
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">	
                                 <label class="col-sm-3 control-label text-right">描述：</label>
@@ -102,7 +113,7 @@
                         <button data-dismiss="modal" class="btn btn-default" type="button">
                             <i class="fa fa-times"></i>&nbsp;&nbsp;关闭
                         </button>				
-                        <button  class="btn btn-primary" type="button">提交</button>
+                        <button  class="btn btn-primary" id="add_machine_submit" type="button">提交</button>
                     </div>
                 </div>
             </div>
