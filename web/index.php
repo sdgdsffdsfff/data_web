@@ -27,8 +27,6 @@ $smarty = new Smarty();
 $smarty->template_dir = CODE_BASE . '/web/templates/';
 $smarty->compile_dir = CODE_BASE . '/web/templates_c/';
 $smarty->plugins_dir = CODE_BASE . '/libs/plugins/';  //插件文件
-$smarty->cache_dir =  CODE_BASE . '/web/cache/';
-$smarty->cache_lifetime = 600;//缓存时间
 
 $app = new \Slim\Slim();
 
@@ -54,11 +52,9 @@ $app->config([
 ]);
 
 if(DEV == 1){
-    $smarty->caching = false;
     $smarty->debugging = false;
     $app->config('debug', true);
 } else {
-    $smarty->caching = true;
     $smarty->debugging = false;
     $app->config('debug', false);
 }
