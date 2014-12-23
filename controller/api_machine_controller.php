@@ -21,7 +21,7 @@ class ApiMachineController extends WebController{
         
         $sql = $this->_app->request()->post('sql');
         $this->debug_log(date('Y-m-d h:i:s').' : '.$sql);
-        if($this->_m->monitorUpdate($$sql))
+        if($this->_m->monitorUpdate($sql))
             echo $this->format_obj_response([]);
         else 
             echo $this->format_error_response();
