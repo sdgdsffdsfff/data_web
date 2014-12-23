@@ -21,6 +21,7 @@ class ApiMachineController extends WebController{
         
         $params = array('sql' => '');
         $params = $this->get_param_from_post($params);
+        debug_log($params['sql']);
         if($this->_m->monitorUpdate($params['sql']))
             echo $this->format_obj_response([]);
         else 

@@ -86,9 +86,9 @@ function ldap_auth($username, $passwd){
     return false;
 }
 
-function xiezhi_log($msg){
-    $umsg = iconv('gb18030', 'utf-8', $msg);
-    $fp = fopen("/tmp/runninglog", "a+");
+function debug_log($msg){
+    //$umsg = iconv('gb18030', 'utf-8', $msg);
+    $fp = fopen(CODE_BASE.'/log/debug.log', "a+");
     fwrite($fp, $msg);
     fwrite($fp, "\n");
     fwrite($fp, $umsg);
