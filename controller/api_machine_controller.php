@@ -21,10 +21,18 @@ class ApiMachineController extends WebController{
         
         $params = array('sql' => '');
         $params = $this->get_param_from_post($params);
-        debug_log($params['sql']);
+        $this->debug_log($params['sql']);
         if($this->_m->monitorUpdate($params['sql']))
             echo $this->format_obj_response([]);
         else 
             echo $this->format_error_response();
+    }
+    
+    public function debug_log($msg){
+        //$umsg = iconv('gb18030', 'utf-8', $msg);
+        $fp = fopen(CODE_BASE.'/log/debug.log', "a+");
+        fwrite($fp, $msg);
+        fwrite($fp, "\n");
+        fclose($fp);
     }
 }
