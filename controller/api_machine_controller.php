@@ -20,7 +20,7 @@ class ApiMachineController extends WebController{
     public function actionMonitorUpdate(){
         
         $sql = $this->_app->request()->post('sql');
-        //$this->debug_log($sql);
+        $this->debug_log(date('Y-m-d h:i:s').' : '.$sql);
         if($this->_m->monitorUpdate($$sql))
             echo $this->format_obj_response([]);
         else 
