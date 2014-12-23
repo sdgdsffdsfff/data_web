@@ -14,17 +14,22 @@ class ApiMachineController extends WebController{
     public function __construct($app)
     {
         parent::__construct($app);
+        $this->_db = $this->_app->config('mysql_machineMonitor_db');
         $this->_m = new MachineModel($this->_db);
     }
 
     public function actionMonitorUpdate(){
         
         $sql = $this->_app->request()->post('sql');
-        $this->debug_log(date('Y-m-d h:i:s').' : '.$sql);
-        if($this->_m->monitorUpdate($sql))
+        
+        if($this->_m->monitorUpdate($sql)){
+            $this->debug_log(date('Y-m-d h:i:s').' : '.$sql.' ok');
             echo $this->format_obj_response([]);
-        else 
+        } else {
+            $this->debug_log(date('Y-m-d h:i:s').' : '.$sql.' fail');
             echo $this->format_error_response();
+        } 
+            
     }
     
     public function debug_log($msg){
