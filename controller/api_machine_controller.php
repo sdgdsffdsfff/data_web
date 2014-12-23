@@ -19,10 +19,9 @@ class ApiMachineController extends WebController{
 
     public function actionMonitorUpdate(){
         
-        $params = array('sql' => '');
-        $params = $this->get_param_from_post($params);
-        $this->debug_log($_POST['sql']);
-        if($this->_m->monitorUpdate($params['sql']))
+        $sql = $this->_app->request()->post('sql');
+        //$this->debug_log($sql);
+        if($this->_m->monitorUpdate($$sql))
             echo $this->format_obj_response([]);
         else 
             echo $this->format_error_response();
