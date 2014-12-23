@@ -8,16 +8,22 @@ for($i = 0; $i < count($models); $i++){
     require_once(CODE_BASE . "model/" . $models[$i] . ".php");
 }
 
-class WebMachineController extends WebController{
+class ApiMachineController extends WebController{
 
+    protected $_m;
     public function __construct($app)
     {
         parent::__construct($app);
-        
+        $this->_m = new MachineModel($this->_db);
     }
 
-    public function manager(){
+    public function actionMonitorUpdate(){
         
-        echo $this->gene_default_display('机器管理', 'machine/manager.tpl');
+        $params = array('sql' => '');
+        $params = $this->get_param_from_post($params);
+        if($this->_m->monitorUpdate($params['sql']))
+            echo $this->format_obj_response([]);
+        else 
+            echo $this->format_error_response();
     }
 }

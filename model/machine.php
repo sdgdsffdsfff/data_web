@@ -27,5 +27,11 @@ class MachineModel
     public function add($row){
         return $this->_db->insert('machineinfo', $row);
     }
+    
+    public function monitorUpdate($sql) {
+        if($this->_db->query($sql))
+            return true;
+        return false;
+    }
 
 }

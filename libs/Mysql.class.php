@@ -137,7 +137,7 @@ class Db_Mysql
 	{
 		$this->_query =	mysql_query($sql, $this->_connection);
 		if(!$this->_query){
-            print_r(mysql_error($this->_connection));
+            //print_r(mysql_error($this->_connection));
             return NULL;
 		}
 		return	$this->_query;

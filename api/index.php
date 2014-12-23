@@ -26,6 +26,7 @@ require_once(CODE_BASE . "libs/Mysql.class.php");
 $mysql_db = new Db_Mysql($mysql_config);
 $mysql_data_db = new Db_Mysql($mysql_data_config);
 $mysql_utcc_db = new Db_Mysql($mysql_utcc_config);
+$mysql_machineMonitor_db = new Db_Mysql($mysql_machineMonitor_config);
 
 //json api 返回格式设置
 $res_format = [
@@ -38,6 +39,7 @@ $app->config([
     'mysql_db' => $mysql_db,
     'mysql_data_db'=>$mysql_data_db, 
     'mysql_utcc_db'=>$mysql_utcc_db, 
+    'mysql_machineMonitor_db'=>$mysql_machineMonitor_db,
     'resp' => $res_format
 ]);
 

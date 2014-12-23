@@ -15,16 +15,16 @@ var dtGridColumns = [
     {id:'city', title:'城市', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
     {id:'descs', title:'描述', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
     {id:'loadavg', title:'负载', type:'string', columnClass:'text-center'},
-    {id:'cpuUsage', title:'CPU使用率', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'ge'},
-    {id:'memUsage', title:'内存使用率', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'ge'},
-    {id:'diskUsage', title:'硬盘使用率', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'ge'},
+    {id:'cpuUsage', title:'CPU使用率', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'range'},
+    {id:'memUsage', title:'内存使用率', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'range'},
+    {id:'diskUsage', title:'硬盘使用率', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'range'},
     {id:'diskLoad', title:'磁盘负载', type:'number', columnClass:'text-center'},
     {id:'trafficIn', title:'下行流量', type:'string', columnClass:'text-center'},
     {id:'trafficOut', title:'上行流量', type:'string', columnClass:'text-center'},
     {id:'badproc', title:'故障进程', type:'string', columnClass:'text-center'},
-    {id:'lastUptime', title:'更新时间', type:'date', format:'yyyy-MM-dd hh:mm:ss', otype:'string', columnClass:'text-center',  fastQuery:true, fastQueryType:'ge'},
-    {id:'clientVersion', title:'客户端版本', type:'string', columnClass:'text-center'},
-    {id:'status', title:'状态', type:'number', columnClass:'text-center'}
+    {id:'lastUptime', title:'更新时间', type:'date', format:'yyyy-MM-dd hh:mm:ss', otype:'string', columnClass:'text-center'},
+    {id:'clientVersion', title:'客户端版本', type:'string', columnClass:'text-center', hideType:'lg|md|sm|xs'},
+    {id:'status', title:'状态', type:'number', columnClass:'text-center', hideType:'lg|md|sm|xs'}
 ];
 var dtGridOption = {
         ajaxLoad : true,
