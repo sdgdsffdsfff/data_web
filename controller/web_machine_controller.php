@@ -35,6 +35,7 @@ class WebMachineController extends WebController{
         require(CODE_BASE . "libs/dtGrid/lib/excel/PHPExcel.php");
         require(CODE_BASE . 'libs/dtGrid/lib/excel/PHPExcel/IOFactory.php');  
         require(CODE_BASE . 'libs/dtGrid/lib/excel/PHPExcel/Writer/Excel5.php'); 
+        
         if(isset($_POST["dtGridPager"])){
             $dtGridPager = $_POST["dtGridPager"];
             $pager = json_decode($dtGridPager, true);
@@ -43,6 +44,7 @@ class WebMachineController extends WebController{
             DtGridUtils::queryForDTGrid($sql, $pager, $this->_db->getConnection());
             exit;
         }
+        
         $msg = isset($_SESSION['errmsg']) ? $_SESSION['errmsg'] : '';
         $_SESSION['errmsg'] = '';
         echo $this->gene_default_display('机器列表', 'machine/list.tpl',['error'=>$msg]);
@@ -65,7 +67,7 @@ class WebMachineController extends WebController{
         
         $val = $this->get_param_from_post($keys);
         $result = $this->_m->add($val);
-        if($result == -1){
+        if($result === false){
             $_SESSION['errmsg'] = $this->_db->error();
         }
         

@@ -14,8 +14,8 @@ class MachineModel
         $this->_db->query('begin');
         $sql = "DELETE FROM  machineinfo WHERE id = {$id}";
         $sql1 = "DELETE FROM hardware where ip = '{$ip}'";
-        $res = $this->_db->query($sql);
-        $res1 = $this->_db->query($sql1);
+        $this->_db->query($sql);
+        $this->_db->query($sql1);
         if( $this->_db->get_errno() ){
             $this->_db->query('rollback');
             return FALSE;
@@ -25,13 +25,15 @@ class MachineModel
     }
 
     public function add($row){
-        return $this->_db->insert('machineinfo', $row);
+        $this->_db->query('begin');
+        $res = $this->_db->insert('machineinfo', $row);
+        $res2 = $this->_db->insert('hardware', ['ip'=>$row['ip']]);
+        if( $this->_db->get_errno() ){
+            $this->_db->query('rollback');
+            return FALSE;
+        }
+        $this->_db->query('commit');
+        return TRUE;
     }
     
-    public function monitorUpdate($sql) {
-        if($this->_db->query($sql))
-            return true;
-        return false;
-    }
-
 }
