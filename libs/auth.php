@@ -31,7 +31,6 @@ function api_auth()
     // 将POST的UTCC的放行，在逻辑中检查是否合理
     if(strpos($_SERVER['REQUEST_URI'], 'utcc') > 0) return true;
     if(strpos($_SERVER['REQUEST_URI'], 'test') !== FALSE) return true;
-    if(strpos($_SERVER['REQUEST_URI'], 'monitor_update') !== FALSE) return true;
     
     if(isset($_SESSION['username']) && $_SESSION['username'] == $req->params('username') 
         && isset($_SESSION['token']) && $_SESSION['token'] == $req->params('token')

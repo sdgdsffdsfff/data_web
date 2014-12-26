@@ -46,7 +46,6 @@ $app->config([
 require_once("hl_index.php");
 require_once("trend_index.php");
 require_once("utcc_index.php");
-require_once("machine_index.php");
 
 $app->get('/test', function () use($app) {
     //var_dump($app->request()->get('xx'));
