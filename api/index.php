@@ -7,7 +7,7 @@ require dirname(__FILE__) . '/../config.php';
 //$session_handler = new MemcacheSessionHandler($memcache_host);
 //session_set_save_handler($session_handler, true);
 session_set_cookie_params(0, '/', DOMAIN, false, true);
-session_cache_limiter(false);
+//session_cache_limiter(false);
 session_start();
 
 require_once (CODE_BASE . 'Slim/Slim.php');

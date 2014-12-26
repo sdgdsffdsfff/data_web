@@ -6,7 +6,7 @@ require dirname(__FILE__) . '/../config.php';
 //session_set_save_handler($session_handler, true);
 //第四个参数在启用https链接的网站可以设置为true，否则必须设为false
 session_set_cookie_params(0, '/', DOMAIN, false, true);
-session_cache_limiter(false);
+//session_cache_limiter(false);
 session_start();
 
 require_once(CODE_BASE . "libs/Mysql.class.php");
