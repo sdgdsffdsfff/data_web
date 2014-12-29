@@ -3,14 +3,28 @@ var dtGridColumns = [
     
     {id:'ip', title:'IP', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'lk',
     resolution:function(record, value){
-	        var content = '';
-	        if(record.status == 500){
-                    content += '<span style="background:#FF0000;padding:2px 10px;color:white;">'+ value +'</span>';
-	        }else{
-	            content += value ;
-	        }
-	        return content;
-	    }
+            function strToDate (dateStr){
+                var data = dateStr; 
+                var reCat = /(\d{1,4})/gm;  
+                var t = data.match(reCat);
+                t[1] = t[1] - 1;
+                
+                eval('var d = new Date('+t.join(',')+');');
+                return d;
+            }
+            var content = '';
+            //console.log(strToDate(record.lastUptime));
+            var d = strToDate(record.lastUptime);
+            var diffTime = new Date() - d;
+            //console.log(diffTime);
+            if(record.status == 500 || diffTime > 370000){
+
+                content += '<span style="background:#FF0000;padding:2px 10px;color:white;">'+ value +'</span>';
+            }else{
+                content += value ;
+            }
+            return content;
+        }
     },
     {id:'city', title:'城市', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
     {id:'descs', title:'描述', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
