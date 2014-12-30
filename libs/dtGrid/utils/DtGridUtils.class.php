@@ -55,7 +55,7 @@ class DtGridUtils {
 				$recordCount = $row[0];
 			}
 			$pager["recordCount"] = $recordCount;
-			$pageCount = $recordCount/$pageSize+($recordCount%$pageSize>0?1:0);
+			$pageCount = ceil($recordCount/$pageSize);
 			$pager["pageCount"] = $pageCount;
 //			查询结果集放到信息中
 			$resultSql = "";
