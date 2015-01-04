@@ -12,6 +12,7 @@
         <table width="100%">
             <tbody>
                 <tr>
+                    <td>用户ID</td>
                     <td>用户名</td>
                     <td>邮箱</td>
                     <td>电话</td>
@@ -19,6 +20,7 @@
                 </tr>
                 {foreach from=$list item=item}
                 <tr>
+                    <td>{$item['id']}</td>
                     <td>{$item['name']}</td>
                     <td>{$item['email']}</td>
                     <td>{$item['phone']}</td>
