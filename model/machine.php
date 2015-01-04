@@ -36,4 +36,22 @@ class MachineModel
         return TRUE;
     }
     
+    public function getUserList() {
+        $sql = "SELECT * from userInfo";
+        return $this->_db->queryAll($sql);
+    }
+    
+    public function addUser($row) {
+        if($this->_db->insert('userInfo', $row) === -1)
+            return false;
+        return true;
+    }
+    public function userDelete($id) {
+        $sql = "DELETE FROM userInfo where id = {$id}";
+        if($this->_db->query($sql)){
+            return true;
+        }
+        return false;
+    }
+    
 }

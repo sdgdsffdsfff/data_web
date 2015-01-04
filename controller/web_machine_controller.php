@@ -18,6 +18,36 @@ class WebMachineController extends WebController{
         $this->_m = new MachineModel($this->_db);
         
     }
+    
+    public function actionUserManager() {
+        $m = new MachineModel($this->_db);
+        $list = $m->getUserList();
+        echo $this->gene_default_display('机器所属用户管理', 'machine/user_manager.tpl',['list'=>$list]);
+    }
+    
+    public function actionUserAdd() {
+        $keys = ['name' => '', 
+            'email' => '',
+            'phone'=>''
+        ];
+        
+        $val = $this->get_param_from_post($keys);
+        $result = $this->_m->userAdd($val);
+        if($result === false){
+            $_SESSION['errmsg'] = $this->_db->error();
+        }
+        
+        return $this->_app->redirect(SITE_PREFIX . "/machine/usermanager");
+    }
+    
+    public function actionUserDelete() {
+        $param = $this->get_param_from_get(['id'=>0]);
+        $result = $this->_m->userDelete($param['id']);
+        if($result == false){
+            $_SESSION['errmsg'] = '删除失败 ';
+        }
+        return $this->_app->redirect(SITE_PREFIX . "/machine/usermanager");
+    }
 
     public function actionManager(){
         
