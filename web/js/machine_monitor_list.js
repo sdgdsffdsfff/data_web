@@ -28,6 +28,7 @@ var dtGridColumns = [
     },
     {id:'city', title:'城市', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
     {id:'descs', title:'描述', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
+    {id:'userID', title:'用户', type:'number',codeTable:jsonUser, columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
     {id:'loadavg', title:'负载', type:'string', columnClass:'text-center'},
     {id:'cpuUsage', title:'CPU使用率', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'range'},
     {id:'memUsage', title:'内存使用率', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'range'},

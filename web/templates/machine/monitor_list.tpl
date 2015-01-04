@@ -33,7 +33,10 @@
     <div>
         <div id="dtGridContainer" class="dt-grid-container"></div>
         <div id="dtGridToolBarContainer" class="dt-grid-toolbar-container"></div>
-    </div>        
+    </div>
+    <script>
+        var jsonUser = {$jsonUser};
+    </script>
     <script type="text/javascript" src="{$SITE_PREFIX}js/machine_monitor_list.js"></script>
 </body>
 </html>

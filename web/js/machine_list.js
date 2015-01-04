@@ -1,5 +1,5 @@
 var ignored = {0:'NO', 1:'YES'};
-var degree = {1:'小学', 2:'初中', 3:'高中', 4:'中专', 5:'大学', 6:'硕士', 7:'博士', 8:'其他'};
+
 var dtGridColumns = [
     
     {id:'name', title:'机器名称', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'lk'},

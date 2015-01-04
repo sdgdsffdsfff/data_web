@@ -136,6 +136,14 @@ class WebMachineController extends WebController{
             DtGridUtils::queryForDTGrid($sql, $pager, $this->_db->getConnection());
             exit;
         }
-        echo $this->gene_default_display('监控报表', 'machine/monitor_list.tpl');
+        $arrUser = $this->_m->getUserList();
+        $arrTmp = [];
+        if(!empty($arrUser)){
+            foreach ($arrUser as $user) {
+                $arrTmp[$user['id']] = $user['name'];
+            }
+        }
+        $jsonUser = json_encode($arrTmp);
+        echo $this->gene_default_display('监控报表', 'machine/monitor_list.tpl',['jsonUser'=>$jsonUser]);
     }
 }
