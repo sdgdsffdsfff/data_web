@@ -41,7 +41,7 @@ class MachineModel
         return $this->_db->queryAll($sql);
     }
     
-    public function addUser($row) {
+    public function userAdd($row) {
         if($this->_db->insert('userInfo', $row) === -1)
             return false;
         return true;
