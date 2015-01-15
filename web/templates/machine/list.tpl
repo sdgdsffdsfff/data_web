@@ -48,7 +48,7 @@
                     <form action="{$SITE_PREFIX}machine/add" method="post" id="add_machine_form">	
                         <div class="modal-body form-horizontal">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-right">机器名称：</label>
+                                <label class="col-sm-3 control-label text-right">机器名称：<i style="color: #ff0000;">*</i></label>
                                 <div class="col-sm-4">
                                     <input type="text" placeholder="请输入机器名称" name="name" class="form-control">
                                 </div>
@@ -62,7 +62,7 @@
                                 <div class="col-sm-4"><input type="text" placeholder="请输入城市" name="city" id="city" class="form-control"></div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-right">IP：</label>
+                                <label class="col-sm-3 control-label text-right">IP：<i style="color: #ff0000;">*</i></label>
                                 <div class="col-sm-4"><input type="text" placeholder="请输入IP" name="ip" id="ip" class="form-control"></div>
                             </div>
                             <div class="form-group">
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="form-group">	
-                                <label class="col-sm-3 control-label text-right">描述：</label>
+                                <label class="col-sm-3 control-label text-right">描述：<i style="color: #ff0000;">*</i></label>
                                 <div class="col-sm-4"><input type="text" placeholder="请输入描述" name="descs" id="descs" class="form-control"></div>
                             </div>
                             <div class="form-group">
@@ -104,8 +104,16 @@
                                 <div class="col-sm-4"><input type="text" placeholder="请输入进程列表" name="processList" class="form-control"></div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-right">用户ID：</label>
-                                <div class="col-sm-4"><input type="text" placeholder="请输入用户ID" name="userID" id="userID" class="form-control"></div>
+                                <label class="col-sm-3 control-label text-right">用户ID：<i style="color: #ff0000;">*</i></label>
+                                <div class="col-sm-4">
+                                    <select name="userID"  class="form-control">
+                                        <option value="0"></option>
+                                        {foreach from=json_decode($jsonUser, true) key=uid item=item}
+                                        <option value="{$uid}">{$item}</option>
+                                        {/foreach}
+                                    </select>
+                                    
+                                </div>
                             </div>	
                         </div>
                     </form>			
@@ -120,7 +128,10 @@
         </div>    
         <div id="dtGridContainer" class="dt-grid-container"></div>
         <div id="dtGridToolBarContainer" class="dt-grid-toolbar-container"></div>
-    </div>        
+    </div>
+    <script>
+        var jsonUser = {$jsonUser};
+    </script>
     <script type="text/javascript" src="{$SITE_PREFIX}js/machine_list.js"></script>
 </body>
 </html>

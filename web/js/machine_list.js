@@ -14,7 +14,7 @@ var dtGridColumns = [
     {id:'ignored', title:'忽略监控', type:'number', columnClass:'text-center', codeTable:ignored, fastQuery:true, fastQueryType:'eq'},
     {id:'descs', title:'描述', type:'string', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
     {id:'processList', title:'进程列表', type:'string', columnClass:'text-center'},
-    {id:'userID', title:'用户ID', type:'number', columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
+    {id:'userID', title:'用户ID', type:'number', codeTable:jsonUser, columnClass:'text-center', fastQuery:true, fastQueryType:'eq'},
     {id:'id', title:'操作', type:'number',columnClass:'text-center' ,resolution:function(record, value){
 	        var content = '';
                     

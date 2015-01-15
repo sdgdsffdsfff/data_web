@@ -75,14 +75,24 @@ class WebMachineController extends WebController{
             exit;
         }
         
+        $arrUser = $this->_m->getUserList();
+        $arrTmp = [];
+        if(!empty($arrUser)){
+            foreach ($arrUser as $user) {
+                $arrTmp[$user['id']] = $user['name'];
+            }
+        }
+        $jsonUser = json_encode($arrTmp);
+        
         $msg = isset($_SESSION['errmsg']) ? $_SESSION['errmsg'] : '';
         $_SESSION['errmsg'] = '';
-        echo $this->gene_default_display('机器列表', 'machine/list.tpl',['error'=>$msg]);
+        echo $this->gene_default_display('机器列表', 'machine/list.tpl',['error'=>$msg,'jsonUser'=>$jsonUser]);
     }
     
     public function actionAdd() {
         $keys = ['name' => '', 
             'province' => '',
+            'city' => '',
             'ip'=>'',
             'cdnid'=>0,
             'cpuNum'=>0,
