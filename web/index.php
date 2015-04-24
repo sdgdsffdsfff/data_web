@@ -17,7 +17,6 @@ require_once(CODE_BASE . 'libs/auth.php');
 require_once (CODE_BASE . 'Slim/Slim.php');
 \Slim\Slim::registerAutoloader();
 
-date_default_timezone_set('Asia/Shanghai');
 if(!isset($_SESSION['LANG'])){
     $_SESSION['LANG'] = 'cn';
 }

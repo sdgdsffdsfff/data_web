@@ -1,16 +1,8 @@
 <?php
-$controllers = array('admin', 'web_admin', 'api_user');
-foreach($controllers as $key){
-    require_once(CODE_BASE . "/controller/" . $key . "_controller.php");
-}
-$app->get('/check', function () use($app) {
-    $mc = new Memcached();
-    $mc->addServer('a.ku6.com', 11211);
-    $stat = $mc->getStats();
-    $s = array_pop($stat);
-    echo $s['pid'];
-    die("");
-});
+require_once(CODE_BASE . "/controller/admin_controller.php");
+require_once(CODE_BASE . "/controller/web_admin_controller.php");
+require_once(CODE_BASE . "/controller/api_user_controller.php");
+
 //login
 $app->get('/', function () use($app) {
     
