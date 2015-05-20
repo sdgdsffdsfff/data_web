@@ -30,4 +30,4 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-/configs/main.php
+configs/main.php
