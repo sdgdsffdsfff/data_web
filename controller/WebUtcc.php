@@ -2,7 +2,7 @@
 if(!defined("CODE_BASE")){
     die("Bad Request");
 }
-require_once(CODE_BASE . 'controller/base.php');
+
 class WebUtccController extends WebController
 {
     public function __construct($app)
