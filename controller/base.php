@@ -1,4 +1,8 @@
 <?php
+if(!defined("CODE_BASE")){
+    die("Bad Request");
+}
+
 abstract class BaseController
 {
     protected $_app;

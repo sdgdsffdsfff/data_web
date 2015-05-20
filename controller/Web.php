@@ -1,4 +1,8 @@
 <?php
+if(!defined("CODE_BASE")){
+    die("Bad Request");
+}
+
 class WebController extends BaseController
 {
 
