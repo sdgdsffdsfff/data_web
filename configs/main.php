@@ -2,8 +2,8 @@
 //set default time zone
 date_default_timezone_set('Asia/Chongqing');
 
-define("MODE", 'production');
-define("DOMAIN", 'data.ku6.com');
+define("MODE", 'development');
+define("DOMAIN", 'datalocal.ku6.com');
 
 define("SITE_PREFIX", '/web/');
 define("API_PREFIX", '/api/');

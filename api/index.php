@@ -1,6 +1,8 @@
 <?php
 define('CODE_BASE', dirname(__FILE__) . "/../");
 
+include CODE_BASE.'configs/main.php';
+
 # Frameworks
 require_once (CODE_BASE . 'library/Slim/Slim.php');
 \Slim\Slim::registerAutoloader();

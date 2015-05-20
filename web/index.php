@@ -1,6 +1,7 @@
 <?php
 define('CODE_BASE', dirname(__FILE__) . "/../");
 
+include CODE_BASE.'configs/main.php';
 /*
 //require_once(CODE_BASE . "libs/Memcache.SessionHandler.php");
 //$session_handler = new MemcacheSessionHandler($memcache_host);
