@@ -3,7 +3,7 @@
 date_default_timezone_set('Asia/Chongqing');
 
 define("MODE", 'development');
-define("DOMAIN", 'datalocal.ku6.com');
+define("DOMAIN", 'data.ku6.com');
 
 define("SITE_PREFIX", '/web/');
 define("API_PREFIX", '/api/');
