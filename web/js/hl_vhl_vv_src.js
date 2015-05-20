@@ -9,8 +9,7 @@ function parse_page(req,msg){
     Helper.drawCommonChart('graphs-old-vv', '渠道日报('+req.d_offset+'天内)',options);
 };
 $(document).ready(function(){
-    $("#load").show();
+
     Helper.loadData(API_PREFIX + "hl/vhl/vv_src",{d_offset:30},parse_page);
-    $("#graphs").tabs();
-    $("#load").hide();                
+
 }); 

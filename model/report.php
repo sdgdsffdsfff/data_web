@@ -1,5 +1,5 @@
 <?php
-class ReportManagerModel
+class ReportModel
 {
     public function __construct($db){
         $this->_db = $db;

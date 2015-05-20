@@ -1,55 +1,76 @@
 <?php
-require dirname(__FILE__) . '/../config.php';
-/*
- * 设置session保存方式，默认memcache，不可用时file
- */
-//require_once(CODE_BASE . "libs/Memcache.SessionHandler.php");
-//$session_handler = new MemcacheSessionHandler($memcache_host);
-//session_set_save_handler($session_handler, true);
-session_set_cookie_params(0, '/', DOMAIN, false, true);
-//session_cache_limiter(false);
-session_start();
+define('CODE_BASE', dirname(__FILE__) . "/../");
 
-require_once (CODE_BASE . 'Slim/Slim.php');
+# Frameworks
+require_once (CODE_BASE . 'library/Slim/Slim.php');
 \Slim\Slim::registerAutoloader();
 
-$app = new \Slim\Slim();
-if(AUTH_ENABLE == 1)
-{
-    $app->hook('slim.before.dispatch', 'api_auth');
-}
-if(DEV==1){
-    $app->config('debug', true);
-}
+#app autoloader
+require_once (CODE_BASE . 'library/App.php');
+App::registerAutoloader();
 
-require_once(CODE_BASE . "libs/Mysql.class.php");
-$mysql_db = new Db_Mysql($mysql_config);
-$mysql_data_db = new Db_Mysql($mysql_data_config);
-$mysql_utcc_db = new Db_Mysql($mysql_utcc_config);
-$mysql_machineMonitor_db = new Db_Mysql($mysql_machineMonitor_config);
 
-//json api 返回格式设置
-$res_format = [
-    'meta' => ['status' => 404, 'msg' => 'default segment'], 
-    'response' => []
-];
+$app = new \Slim\Slim(['mode' => MODE]);
 
-//设置应用参数
-$app->config([
-    'mysql_db' => $mysql_db,
-    'mysql_data_db'=>$mysql_data_db, 
-    'mysql_utcc_db'=>$mysql_utcc_db, 
-    'mysql_machineMonitor_db'=>$mysql_machineMonitor_db,
-    'resp' => $res_format
-]);
+// 只在“production”模式中执行
+$app->configureMode('production', function() use($app){
+    $app->config(array(
+        'log.enable' => true,
+        'debug' => false
+    ));
+});
+
+// 只在“development”模式中执行
+$app->configureMode('development', function() use($app){
+    $app->config(array(
+        'log.enable' => false,
+        'debug' => true
+    ));
+});
+
+//使用 \Slim\Middleware\SessionCookie 中间件把会话数据储存到经过加密和散列的 HTTP cookies中
+$app->add(new \Slim\Middleware\SessionCookie(array(
+    'expires' => '20 minutes',
+    'path' => '/',
+    'domain' => DOMAIN,
+    'secure' => false,
+    'httponly' => true,
+    'name' =>'data_session',
+    'secret' => 'CHANGE_ME',
+    'cipher' => MCRYPT_RIJNDAEL_256,
+    'cipher_mode' => MCRYPT_MODE_CBC
+)));
+
+//权限判断
+$app->hook('slim.before.dispatch', function() use($app){
+    $req = $app->request();
+    // 将POST的UTCC的放行，在逻辑中检查是否合理
+    if(strpos($_SERVER['REQUEST_URI'], 'utcc') > 0) return true;
+    if(strpos($_SERVER['REQUEST_URI'], 'test') !== FALSE) return true;
+
+    if(isset($_SESSION['username']) && $_SESSION['username'] == $req->params('username')
+        && isset($_SESSION['token']) && $_SESSION['token'] == $req->params('token')
+        && isset($_SESSION['url']) && in_array(substr($req->getPath(), strlen(API_PREFIX)), $_SESSION['url'])){
+        return true;
+    }
+    //wrong parameter error
+    $err_res = json_encode(['meta' => ['status' => 401, 'msg' => 'you are not permitted to access this interface. wrong parameter']]);
+    $app->halt(401, $err_res);
+});
+
+//单例mysql
+$db_config = require_once (CODE_BASE . 'configs/mysql.php');
+$app->container->singleton('db_ku6_report', function() use($db_config){
+    return new Mysql($db_config['ku6_report']);
+});
+$app->container->singleton('db_new_utcc', function() use($db_config){
+    return new Mysql($db_config['new_utcc']);
+});
+
+
 
 require_once("hl_index.php");
 require_once("trend_index.php");
 require_once("utcc_index.php");
 
-$app->get('/test', function () use($app) {
-    //var_dump($app->request()->get('xx'));
-    $app->render('test.php');
-});
 $app->run();
-

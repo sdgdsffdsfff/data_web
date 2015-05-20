@@ -25,9 +25,6 @@ function parse_page(req, msg){
          
 }
 $(function(){
-    $("#graphs").tabs();
-    $("#load").show();
     Helper.loadData(API_PREFIX + 'hl/vhl/channel_daily_top50',{},parse_page);
-    $("#load").hide();
 });
  

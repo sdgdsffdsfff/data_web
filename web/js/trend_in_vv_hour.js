@@ -20,21 +20,21 @@ function parse_page(req, msg){
                     }
                 });
             }
-                
+
         });
         options.series[i] = {
             name: name,
             data: data
         };
-    }); 
+    });
+    //console.log(options);
+
     Helper.drawStockChart('graphs-30days-vvuv', 'VV、UV时报', options);
 }
 
 $(function(){
-    $("#load").show();
+
     Helper.loadData(API_PREFIX + 'trend/in_vv_hour',{d_offset:30,stat_date:"ASC",stat_hour:"ASC"},parse_page);
-    $("#graphs").tabs();
-    $("#load").hide();
 });
 
 

@@ -30,8 +30,4 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-web/cache/
-web/templates_c/
-configs/
-config.php
-/log/
+

@@ -8,9 +8,8 @@ class MachineModel
         //delete machine in table machineinfo
         //delete hardware in table hardware
         $id = intval($id);
-        $ip = filter_var($ip, FILTER_VALIDATE_IP);
-        if($ip === false)
-                return false;        
+        //$ip = filter_var($ip, FILTER_VALIDATE_IP);
+
         $this->_db->query('begin');
         $sql = "DELETE FROM  machineinfo WHERE id = {$id}";
         $sql1 = "DELETE FROM hardware where ip = '{$ip}'";
@@ -25,6 +24,7 @@ class MachineModel
     }
 
     public function add($row){
+
         $this->_db->query('begin');
         $res = $this->_db->insert('machineinfo', $row);
         $res2 = $this->_db->insert('hardware', ['ip'=>$row['ip']]);

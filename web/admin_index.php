@@ -1,98 +1,95 @@
 <?php
-require_once(CODE_BASE . "/controller/admin_controller.php");
-require_once(CODE_BASE . "/controller/web_admin_controller.php");
-require_once(CODE_BASE . "/controller/api_user_controller.php");
 
-//login
 $app->get('/', function () use($app) {
-    
+
 });
 
+/******************登陆相关*****************************/
 $app->get('/login', function() use($app){
-    $login_handler = new AdminController($app);
-    $login_handler->show_login();
+
+    $_C = new WebAdminController($app);
+    $_C->login_action();
+
 });
 
 $app->post('/login', function() use($app){
-    $user = new UserController($app);
-    $user->web_login();
-});
-$app->get('/logout', function() use($app){
-    $user = new UserController($app);
-    $user->web_logout();
-});
-$app->get('/admin/welcome', function() use($app){
-    $hl = new WebReportsController($app);
-    $hl->welcome();
-});
-// 删除用户组
-$app->get('/admin/delusergroup', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->del_usergroup();
+    $_C = new WebAdminController($app);
+    $_C->login_action();
 });
 
+$app->get('/logout', function() use($app){
+    $user = new WebAdminController($app);
+    $user->logout_action();
+});
+
+$app->get('/admin/welcome', function() use($app){
+    $hl = new WebAdminController($app);
+    $hl->welcome_action();
+});
+
+
+/******************用户组管理*****************************/
 // 列表用户组
 $app->get('/admin/usergroupmanager', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->groupmanager();
+    $hl = new WebAdminController($app);
+    $hl->usergroupmanager_action();
 });
 
 // 添加用户组
-$app->post('/admin/usergroupmanager', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->add_usergroup();
+$app->post('/admin/add_usergroup', function () use($app) {
+    $hl = new WebAdminController($app);
+    $hl->add_usergroup_action();
 });
 
-// 用户列表
-$app->get('/admin/usersmanager', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->usermanager();
+// 删除用户组
+$app->get('/admin/delusergroup', function () use($app) {
+    $hl = new WebAdminController($app);
+    $hl->del_usergroup();
+});
+
+
+/******************报表管理*****************************/
+// 列表报表和报表组
+$app->get('/admin/reportsmanager', function () use($app) {
+    $hl = new WebAdminController($app);
+    $hl->reports_list_action();
 });
 // 删除报表
 $app->get('/admin/delreport', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->delreport();
+    $hl = new WebAdminController($app);
+    $hl->delreport_action();
 });
 // 添加报表
 $app->post('/admin/newreport', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->newreport();
+    $hl = new WebAdminController($app);
+    $hl->newreport_action();
 });
-// 列表报表和报表组
-$app->get('/admin/reportsmanager', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->reports_list();
+
+/******************用户管理**********************************/
+
+// 用户列表
+$app->get('/admin/usersmanager', function () use($app) {
+    $hl = new WebAdminController($app);
+    $hl->usermanager_action();
 });
 
 $app->post('/admin/newuser', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->newuser();
+    $hl = new WebAdminController($app);
+    $hl->newuser_action();
 });
 
 $app->get('/admin/deluser', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->deluser();
+    $hl = new WebAdminController($app);
+    $hl->deluser_action();
 });
 $app->get('/admin/modifyuser/id/:id', function ($id) use($app) {
-    $hl = new WebReportsController($app);
-    $hl->moduser($id);
+    $hl = new WebAdminController($app);
+    $hl->modifyuser_action($id);
 });
 $app->post('/admin/updateuser', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->updateuser();
+    $hl = new WebAdminController($app);
+    $hl->updateuser_action();
 });
 
-$app->get('/admin/monitor', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->listmonitor();
-});
-$app->post('/admin/monitor', function () use($app) {
-    $hl = new WebReportsController($app);
-    $hl->addmonitor();
-});
-$app->get('/admin/delmonitor/id/:id', function ($id) use($app) {
-    $hl = new WebReportsController($app);
-    $hl->delmonitor($id);
-});
 
 

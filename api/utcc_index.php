@@ -4,10 +4,6 @@
  * @author dongyule
  * 
  */
-$controllers = array('utcc');
-foreach($controllers as $key){
-    require_once(CODE_BASE . "/controller/" ."api_" . $key . "_controller.php");
-}
 //上传视频状态分布
 $app->get('/utcc/upload_video_distribution', function () use($app) {
         $hl = new ApiUtccController($app);

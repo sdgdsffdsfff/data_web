@@ -10,9 +10,7 @@ function parse_page(req, msg){
 }
  
 $(document).ready(function(){
-    $("#load").show();
-    $("#graphs").tabs();
     Helper.loadData(API_PREFIX + "hl/vhl/channel_daily",{d_offset:31},parse_page);
-    $("#load").hide();
+
 });
  

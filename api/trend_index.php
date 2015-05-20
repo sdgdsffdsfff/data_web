@@ -1,8 +1,4 @@
 <?php
-$controllers = array('trend');
-foreach($controllers as $key){
-    require_once(CODE_BASE . "/controller/" ."api_" . $key . "_controller.php");
-}
 /*
  * 趋势分析api
  * @author dongyule

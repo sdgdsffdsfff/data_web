@@ -21,20 +21,24 @@ function parse_page(req,msg){
     });
     Helper.drawColumnChar('graphs-realtime-num', '转码失败任务状态分布(每隔30s自动更新)', options);
     Helper.drawTable('tables-realtime-num', '转码失败任务状态分布(每隔30s自动更新)', msg);
+    Helper.hideLoading();
+
 };
 
 $(function(){
-    
-    $("#load").show();
+
+    Helper.showLoading();
     Helper.loadData(API_PREFIX + 'utcc/transcoding_fails_task_distribution',{},parse_page);
+
     //30s更新一次数据
     setInterval(function(){
         var time = DateUtil.dateToStr();
         Helper.loadData(API_PREFIX + '/utcc/transcoding_fails_task_distribution',{},parse_page);
         $('#time').html(time);
     },30000);
-    $("#graphs").tabs();
-    $("#load").hide();
+
+
+
 });
 
 

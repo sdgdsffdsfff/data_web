@@ -24,8 +24,7 @@ function parse_page(req,msg){
 };
 
 $(function(){
-    
-    $("#load").show();
+
     Helper.loadData(API_PREFIX + 'utcc/transcoding_tasks_distribution',{},parse_page);
     //30s更新一次数据
     setInterval(function(){
@@ -33,8 +32,7 @@ $(function(){
         Helper.loadData(API_PREFIX + '/utcc/transcoding_tasks_distribution',{},parse_page);
         $('#time').html(time);
     },30000);
-    $("#graphs").tabs();
-    $("#load").hide();
+
 });
 
 

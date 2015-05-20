@@ -30,9 +30,8 @@ function parse_page(req, msg){
 }
 
 $(function(){
-    $("#graphs").tabs();
-    $("#load").show();
+
     Helper.loadData(API_PREFIX + 'hl/vhl/in_daily',{},parse_page);
-    $("#load").hide();
+
 });
  

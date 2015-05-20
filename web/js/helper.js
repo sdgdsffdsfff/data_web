@@ -273,7 +273,7 @@ var Helper = function(){
      **************************************************************************/
     
     this.loadData = function (url,data,callback){
-        var reqData = jQuery.extend({username:user, token:token}, data);
+        var reqData = jQuery.extend({username:username, token:token}, data);
         $.ajax({
             type: "get",
             dataType: "json",
@@ -348,7 +348,7 @@ var Helper = function(){
     this.drawStockChart = function(container, title, options){
         var defaults = {
             rangeSelector: {
-                inputEnabled: $('#' + container).width() > 480,
+                inputEnabled: true,
                 buttons: [{
                         type: 'day',  
                         count: 1,  
@@ -412,6 +412,7 @@ var Helper = function(){
         };
         var settings={};
         $.extend(true, settings, defaults, options);
+
         $('#' + container).highcharts('StockChart', settings);
     };
     
@@ -601,35 +602,34 @@ var Helper = function(){
         var rowNum = msg.response.length;//行数
         var columnNum = Helper.JSONLength(msg.response[0]);//列数
         console.log(columnNum);
-        tableHtml += '<table>';
+        tableHtml += '<table class="table table-bordered table-hover dataTable">';
         //thead
         tableHtml += '<thead>';
         tableHtml += '<tr><th colspan="'+columnNum+'">' + title +'</th></tr>';
         tableHtml += '<tr>';
         for(var index in msg.response[0]){
-            tableHtml += '<th>'+ index +'</th>';
+
+            tableHtml += '<th class="sorting" role="columnheader">'+ index +'</th>';
         }
         tableHtml += '</tr>';
         tableHtml += '</thead>';
         
         //tbody
-        tableHtml += '<tbody>';
+        tableHtml += '<tbody role="alert" aria-live="polite" aria-relevant="all">';
         for(var k in msg.response){
-            if(k !== 0 && k%2 !== 0){
-                tableHtml += '<tr class="odd">';
-            }else{
-                tableHtml += '<tr>';
-            }
-            
+
+            tableHtml += '<tr>';
+
             //console.log(msg.response[k]);
             for(var key in msg.response[k]){
                 var tdClass = '';
                 //日期是第一列
                 if(key == 'stat_date') tdClass += 'column1';
+
                 //字符串可以match 数字报错！
                 if(!$.isNumeric(msg.response[k][key])&&msg.response[k][key] != null){
-                    if(msg.response[k][key].match(/^-(.*)%$/)) tdClass += ' red';
-                    if(msg.response[k][key].match(/^(.*)%$/)) tdClass += ' green';
+                    if(msg.response[k][key].match(/^-(.*)%$/)) msg.response[k][key]= '<span class="badge bg-red">'+ msg.response[k][key] +'</span>';
+                    if(msg.response[k][key].match(/^(.*)%$/)) msg.response[k][key]= '<span class="badge bg-green">'+ msg.response[k][key] +'</span>';
                 }
                 tableHtml += '<td class="' + tdClass + '">';
                 tableHtml += msg.response[k][key];
@@ -645,7 +645,16 @@ var Helper = function(){
         var Table = jQuery(tableHtml);
         jQuery("#" + container).html(Table);
     };
-    
+
+    this.showLoading = function(){
+        $("#loading").replaceWith('<div class="overlay"></div> <div class="loading-img"></div>');
+
+    };
+
+    this.hideLoading = function(){
+        $('.overlay').remove();
+        $('.loading-img').remove();
+    };
     
     return this;
     

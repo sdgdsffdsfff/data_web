@@ -1,11 +1,5 @@
 <?php
 
-
-$controllers = array('web_highlevel');
-foreach($controllers as $key){
-    require_once(CODE_BASE . "/controller/" . $key . "_controller.php");
-}
-
 //各频道页PV/UV日报
 $app->get('/hl/vhl/sub_site_daily', function () use($app) {
     $hl = new WebHighLevelController($app);

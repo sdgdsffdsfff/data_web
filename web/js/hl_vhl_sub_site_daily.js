@@ -15,10 +15,9 @@ function parse_page(req,msg)
 }
 
 $(document).ready(function(){
-    $("#load").show();
+
     Helper.loadData( API_PREFIX + "hl/vhl/sub_site_daily",{d_offset:31},parse_page);
-    $("#graphs").tabs();
-    $("#load").hide();
+
 });
 
 
