@@ -1,4 +1,4 @@
-<!-- Content Header (Page header) -->
+<!-- Content Header (Page header)
 <section class="content-header">
     <h1>
         Blank page
@@ -10,3 +10,4 @@
         <li class="active">Blank page</li>
     </ol>
 </section>
+-->
