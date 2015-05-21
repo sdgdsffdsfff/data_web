@@ -29,7 +29,7 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label text-right">refer：</label>
                                                     <div class="col-sm-9">
-                                                        <textarea class="form-control" name="refer" rows="10" placeholder="请输入refer,多个以空格分割"><?=(isset($_POST['refer'])&&$_POST['refer']&&$_POST['search_type']==1)?$_POST['refer']:''?></textarea>
+                                                        <textarea class="form-control" name="refer" rows="10" placeholder="请输入refer,多个以空格或换行分割"><?=(isset($_POST['refer'])&&$_POST['refer']&&$_POST['search_type']==1)?$_POST['refer']:''?></textarea>
                                                     </div>
                                                 </div>
 
@@ -139,6 +139,11 @@
                         <?php endif; ?>
 
                         <?php if(!empty($list)): ?>
+                        <form action="/web/chaxun/export" method="post" style="margin-bottom: 10px;">
+                            <input type="hidden" name="exportDatas" value='<?=json_encode($list)?>'>
+                            <input type="hidden" name="exportFileName" value="refer查询明细">
+                            <button type="submit" class="btn btn-info btn-flat">导出EXCEL</button>
+                        </form>
                         <table class="table table-bordered table-hover table-responsive table-condensed table-striped">
                             <tbody>
 
@@ -157,6 +162,12 @@
 
                             </tbody>
                         </table>
+                        <?php else: ?>
+                        <div class="alert alert-info alert-dismissable">
+                            <i class="fa fa-info"></i>
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <b>呵呵!</b> 没有记录。
+                        </div>
                         <?php endif; ?>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">

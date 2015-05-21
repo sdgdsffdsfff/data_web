@@ -22,3 +22,9 @@ $app->map('/chaxun/url', function () use($app) {
     $c = new WebChaxunController($app);
     $c->url_action();
 })->via('GET', 'POST');
+
+//refer查询明细
+$app->post('/chaxun/export', function () use($app) {
+    $c = new WebChaxunController($app);
+    $c->export_action();
+});

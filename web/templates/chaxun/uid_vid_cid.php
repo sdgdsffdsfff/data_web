@@ -12,6 +12,11 @@
                     <div class="box-header">
                     </div><!-- /.box-header -->
                     <div class="box-body">
+                        <div class="alert alert-info alert-dismissable">
+                            <i class="fa fa-info"></i>
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <b>提示!</b> UID、VID、CID同时只能填写其中的一项，多个条件无法查询。
+                        </div>
                         <div class="box box-primary">
                             <div class="box-header">
 
@@ -24,20 +29,20 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label text-right">UID：</label>
                                         <div class="col-sm-9">
-                                            <textarea class="form-control" name="uid" rows="10" placeholder="请输入UID,多个以空格分割"><?php echo (isset($_POST['uid'])&&$_POST['uid'])?$_POST['uid']:''?></textarea>
+                                            <textarea class="form-control" name="uid" rows="10" placeholder="请输入UID,多个以空格或换行分割"><?php echo (isset($_POST['uid'])&&$_POST['uid'])?$_POST['uid']:''?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label text-right">VID：</label>
                                         <div class="col-sm-9">
 
-                                            <textarea class="form-control" name="vid" rows="10" placeholder="请输入VID,多个以空格分割"><?php echo (isset($_POST['vid'])&&$_POST['vid'])?$_POST['vid']:''?></textarea>
+                                            <textarea class="form-control" name="vid" rows="10" placeholder="请输入VID或播放页URL,多个以空格或换行分割"><?php echo (isset($_POST['vid'])&&$_POST['vid'])?$_POST['vid']:''?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label text-right">CID：</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" value="<?=(isset($_POST['cid'])&&$_POST['cid'])?$_POST['cid']:''?>" name="cid" placeholder="请输入CID,多个以空格分割">
+                                            <input type="text" class="form-control" value="<?=(isset($_POST['cid'])&&$_POST['cid'])?$_POST['cid']:''?>" name="cid" placeholder="请输入CID,多个以空格或换行分割">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -66,6 +71,7 @@
                                             </label>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="box-footer">
@@ -86,6 +92,12 @@
                         <?php endif; ?>
 
                         <?php if(!empty($list)): ?>
+                        <form action="/web/chaxun/export" method="post" style="margin-bottom: 10px;">
+                            <input type="hidden" name="exportDatas" value='<?=json_encode($list)?>'>
+                            <input type="hidden" name="exportFileName" value="UID,VID,CID查询明细">
+                            <button type="submit" class="btn btn-info btn-flat">导出EXCEL</button>
+                        </form>
+
                         <table class="table table-bordered table-hover table-responsive table-condensed table-striped">
                             <tbody>
 
@@ -104,6 +116,12 @@
 
                             </tbody>
                         </table>
+                        <?php else: ?>
+                        <div class="alert alert-info alert-dismissable">
+                            <i class="fa fa-info"></i>
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <b>呵呵!</b> 没有记录。
+                        </div>
                         <?php endif; ?>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">

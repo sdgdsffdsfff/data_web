@@ -131,12 +131,25 @@ class App {
     }
 
     public static function resolveSqlInCondition($str,$itemIsNum = true){
-        $arrItem = preg_split('/\s+/',$str);
+
+        $arrItem = preg_split('/\s+/',trim($str));
+        foreach($arrItem as $k=>$v){
+            $arrItem[$k] = App::resolveVidFromUrl($v);
+        }
+
         if($itemIsNum){
             return join(",",$arrItem);
         }else{
             return "'".join("','",$arrItem)."'";
         }
+    }
+
+    public static function resolveVidFromUrl($url){
+        if($end = strpos($url, '?'))
+            $temp = substr($url, 0, $end);
+        $temp = preg_replace("/.*ku6\\.com.*\\/show.*\\/(.*)\\.html/", "\$1", $temp);
+        $temp = preg_replace("/.*ku6\\.com.*\\/watch\\?.*v\\=([0-9a-zA-Z.\\-_]{6,})[&#]{0,}.*/", "\$1", $temp);
+        return $temp;
     }
 
 }

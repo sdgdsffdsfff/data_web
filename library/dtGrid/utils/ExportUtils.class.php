@@ -52,7 +52,7 @@ class ExportUtils {
 	static function exportExcel($pager, $exportDatas, $fileName){
 //		设置响应头
 		header("Content-Type: application/vnd.ms-execl");
-		header("Content-Disposition: attachment; filename=".$fileName.".xls");
+		header("Content-Disposition: attachment; filename=\"".$fileName.".xls\"");
 		header("Pragma: no-cache");
 		header("Expires: 0");
 //		创建Excel对象
