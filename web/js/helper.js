@@ -601,12 +601,14 @@ var Helper = function(){
         var tableHtml = '';
         var rowNum = msg.response.length;//行数
         var columnNum = Helper.JSONLength(msg.response[0]);//列数
-        console.log(columnNum);
-        tableHtml += '<table class="table table-bordered table-hover dataTable">';
+        //console.log(columnNum);
+        tableHtml += '<table class="table table-bordered table-hover table-responsive table-condensed table-striped">';
         //thead
         tableHtml += '<thead>';
+
         tableHtml += '<tr><th colspan="'+columnNum+'">' + title +'</th></tr>';
         tableHtml += '<tr>';
+
         for(var index in msg.response[0]){
 
             tableHtml += '<th class="sorting" role="columnheader">'+ index +'</th>';
