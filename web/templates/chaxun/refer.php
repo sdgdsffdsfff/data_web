@@ -162,12 +162,7 @@
 
                             </tbody>
                         </table>
-                        <?php else: ?>
-                        <div class="alert alert-info alert-dismissable">
-                            <i class="fa fa-info"></i>
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <b>呵呵!</b> 没有记录。
-                        </div>
+                        
                         <?php endif; ?>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
