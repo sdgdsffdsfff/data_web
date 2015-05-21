@@ -130,17 +130,17 @@ class App {
         return false;
     }
 
-    public static function resolveSqlInCondition($str,$itemIsNum = true){
+    public static function resolveSqlInCondition($condition,$itemIsNum = true){
 
-        $arrItem = preg_split('/\s+/',trim($str));
-        foreach($arrItem as $k=>$v){
-            $arrItem[$k] = App::resolveVidFromUrl($v);
+        if(is_string($condition)){
+            $condition = preg_split('/\s+/',trim($condition));
         }
-
-        if($itemIsNum){
-            return join(",",$arrItem);
-        }else{
-            return "'".join("','",$arrItem)."'";
+        if(is_array($condition)) {
+            if ($itemIsNum) {
+                return join(",", $condition);
+            } else {
+                return "'" . join("','", $condition) . "'";
+            }
         }
     }
 

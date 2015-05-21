@@ -162,7 +162,7 @@
 
                             </tbody>
                         </table>
-                        
+
                         <?php endif; ?>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">

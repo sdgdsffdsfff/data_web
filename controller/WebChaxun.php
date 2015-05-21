@@ -69,13 +69,19 @@ class WebChaxunController extends WebController{
             }
             if($vid && $ge_date && $le_date){
 
-                $strVid = App::resolveSqlInCondition($vid, false);
+                $arrVid = preg_split('/\s+/',trim($vid));
+                foreach($arrVid as $k=>$v){
+                    $arrVid[$k] = App::resolveVidFromUrl($v);
+                }
+
+                $strVid = App::resolveSqlInCondition($arrVid, false);
                 if($show_type == 1)
                     $sql = "select date, {$sqlVidShowField} from {$sqlTable} where vid in ({$strVid}) {$sqlStaticCondition} group by vid, date";
                 if($show_type == 2)
                     $sql = "select {$sqlVidShowField} from {$sqlTable} where vid in ({$strVid}) {$sqlStaticCondition} group by vid";
             }
             if($cid && $ge_date && $le_date){
+
                 $strCid = App::resolveSqlInCondition($cid, true);
                 if($show_type == 1)
                     $sql= "select a.date, {$sqlCidShowField}
@@ -130,7 +136,6 @@ class WebChaxunController extends WebController{
                 'show_type'=>1
             ];
             list($refer, $ge_date, $le_date, $search_type, $show_type) = array_values($this->post($param));
-            $sqlStaticField = " sum(adshow) adshow, sum(uv) UV, sum(vv) VV";
             $sqlTable = "referaduvvv_{$year} ";
             $sqlStaticCondition = " and date >= '{$ge_date}' and date <= '{$le_date}' ";
 
