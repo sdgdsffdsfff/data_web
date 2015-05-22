@@ -110,7 +110,7 @@ class WebChaxunController extends WebController{
             }
 
             if(isset($sql)){
-                echo $sql;
+                //echo $sql;
                 $list = $this->_db->queryAll($sql);
             }else{
                 $_SESSION['errmsg'] = '请检查查询参数';
