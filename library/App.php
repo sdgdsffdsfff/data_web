@@ -146,8 +146,8 @@ class App {
 
     public static function resolveVidFromUrl($url){
         if($end = strpos($url, '?'))
-            $temp = substr($url, 0, $end);
-        $temp = preg_replace("/.*ku6\\.com.*\\/show.*\\/(.*)\\.html/", "\$1", $temp);
+            $url = substr($url, 0, $end);
+        $temp = preg_replace("/.*ku6\\.com.*\\/show.*\\/(.*)\\.html/", "\$1", $url);
         $temp = preg_replace("/.*ku6\\.com.*\\/watch\\?.*v\\=([0-9a-zA-Z.\\-_]{6,})[&#]{0,}.*/", "\$1", $temp);
         return $temp;
     }
