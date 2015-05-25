@@ -77,13 +77,13 @@ class ExportUtils {
 			$i = 0;
 			$j = 1;
 			foreach ($pager["exportColumns"] as $column) {
-				$resultPHPExcel->getActiveSheet()->setCellValue(ExportUtils::dectoletter($i).$j, $column["title"]);
+				$resultPHPExcel->getActiveSheet()->setCellValue(ExportUtils::intToChr($i).$j, $column["title"]);
 				array_push($widths, strlen($column["title"]));
 				$i++;
 			}
 			$j++;
 //			设置表头样式
-			$headerStyle = $resultPHPExcel->getActiveSheet()->getStyle("A1:".ExportUtils::dectoletter(count($pager["exportColumns"])-1)."1");
+			$headerStyle = $resultPHPExcel->getActiveSheet()->getStyle("A1:".ExportUtils::intToChr(count($pager["exportColumns"])-1)."1");
 			$headerStyle->getFont()->setName("微软雅黑");
 			$headerStyle->getFont()->setSize(9);
 			$headerStyle->getFont()->setBold(true);
@@ -104,7 +104,7 @@ class ExportUtils {
 						if(!$pager["exportDataIsProcessed"]){
 							$content = DtGridUtils::formatContent($column, $content);
 						}
-						$resultPHPExcel->getActiveSheet()->setCellValue(ExportUtils::dectoletter($i).$j, $content);
+						$resultPHPExcel->getActiveSheet()->setCellValue(ExportUtils::intToChr($i).$j, $content);
 						if($widths[$i]<strlen($content)){
 							$widths[$i] = strlen($content);
 						}
@@ -113,7 +113,7 @@ class ExportUtils {
 					$j++;
 				}
 //				设置内容样式
-				$contentStyle = $resultPHPExcel->getActiveSheet()->getStyle("A2:".ExportUtils::dectoletter(count($pager["exportColumns"])-1).(count($exportDatas)+1));
+				$contentStyle = $resultPHPExcel->getActiveSheet()->getStyle("A2:".ExportUtils::intToChr(count($pager["exportColumns"])-1).(count($exportDatas)+1));
 				$contentStyle->getFont()->setName("微软雅黑");
 				$contentStyle->getFont()->setSize(9);
 				$contentStyle->getFont()->getColor()->setARGB('FF333333');
@@ -126,7 +126,7 @@ class ExportUtils {
 //			自适应宽度
 			$i = 0;
 			foreach ($pager["exportColumns"] as $column) {
-				$resultPHPExcel->getActiveSheet()->getColumnDimension(ExportUtils::dectoletter($i))->setWidth($widths[$i]);
+				$resultPHPExcel->getActiveSheet()->getColumnDimension(ExportUtils::intToChr($i))->setWidth($widths[$i]);
 				$i++;
 			}
 		}
@@ -134,6 +134,21 @@ class ExportUtils {
 		$xlsWriter = new PHPExcel_Writer_Excel5($resultPHPExcel); 
 		$xlsWriter->save("php://output");
 	}
+
+    /**
+     * 数字转字母 （类似于Excel列标）
+     *
+     * @param Int $index 索引值
+     * @param Int $start 字母起始值
+     * @return String 返回字母
+     */
+    static function intToChr($index, $start = 65) {
+        $str = '';
+        if (floor($index / 26) > 0) {
+        $str .= IntToChr(floor($index / 26)-1);
+        }
+        return $str . chr($index % 26 + $start);
+    }
 	
 	static $letterArr = array(0=>'A', 1=>'B', 2=>'C', 3=>'D', 4=>'E', 5=>'F', 6=>'G', 7=>'H', 8=>'I', 9=>'J', 'a'=>'K', 'b'=>'L', 'c'=>'M', 'd'=>'N', 'e'=>'O', 'f'=>'P', 'g'=>'Q', 'h'=>'R', 'i'=>'S', 'j'=>'T', 'k'=>'U', 'l'=>'V', 'm'=>'W', 'n'=>'X', 'o'=>'Y', 'p'=>'Z');
 	

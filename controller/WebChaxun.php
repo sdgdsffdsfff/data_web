@@ -51,11 +51,6 @@ class WebChaxunController extends WebController{
                           sum(androidad) 安卓AD, sum(androiduv) 安卓UV, sum(androidvv) 安卓VV,
                           sum(iosad) IOSAD, sum(iosuv) IOSUV, sum(iosvv) IOSVV,
                           sum(sumad) 总AD, sum(sumuv) 总UV, sum(sumvv) 总VV ";
-            $sqlCidShowField = " a.cid, a.inad 站内AD, b.inuv 站内UV, a.invv 站内VV,
-                          a.outad 站外AD, b.outuv 站外UV, a.outvv 站外VV,
-                          a.mad M站AD, b.muv M站UV, a.mvv M站VV,
-                          a.androidad 安卓AD, b.androiduv 安卓UV, a.androidvv 安卓VV,
-                          a.iosad IOSAD, b.iosuv IOSUV, a.iosvv IOSVV ";
 
             $sqlTable = " alladuvvv_{$year} ";
             $sqlStaticCondition = " and date >= '{$ge_date}' and date <= '{$le_date}' ";
@@ -84,7 +79,13 @@ class WebChaxunController extends WebController{
 
                 $strCid = App::resolveSqlInCondition($cid, true);
                 if($show_type == 1)
-                    $sql= "select a.date, {$sqlCidShowField}
+                    $sql= "select a.date, a.cid, a.inad 站内AD, b.inuv 站内UV, a.invv 站内VV,
+                          a.outad 站外AD, b.outuv 站外UV, a.outvv 站外VV,
+                          a.mad M站AD, b.muv M站UV, a.mvv M站VV,
+                          a.androidad 安卓AD, b.androiduv 安卓UV, a.androidvv 安卓VV,
+                          a.iosad IOSAD, b.iosuv IOSUV, a.iosvv IOSVV,
+                          (a.inad+a.outad+a.mad+a.androidad+a.iosad) 全站AD, b.alluv 全站UV,
+                          (a.invv+a.outvv+a.mvv+a.androidvv+a.iosvv) 全站VV
                           from(
                             select date,cid,sum(inad) inad,sum(invv) invv,sum(outad) outad,sum(outvv) outvv,
                             sum(mad) mad,sum(mvv) mvv,sum(androidad) androidad,sum(androidvv) androidvv,sum(iosad) iosad,sum(iosvv) iosvv
@@ -97,7 +98,13 @@ class WebChaxunController extends WebController{
 
                     //$sql = "select date, cid, {$sqlStaticField} from {$sqlTable} where cid in ({$strCid}) {$sqlStaticCondition} group by cid, date";
                 if($show_type == 2)
-                    $sql= "select {$sqlCidShowField}
+                    $sql= "select a.cid, sum(a.inad) 站内AD, sum(b.inuv) 站内UV, sum(a.invv) 站内VV,
+                          sum(a.outad) 站外AD, sum(b.outuv) 站外UV, sum(a.outvv) 站外VV,
+                          sum(a.mad) M站AD, sum(b.muv) M站UV, sum(a.mvv) M站VV,
+                          sum(a.androidad) 安卓AD, sum(b.androiduv) 安卓UV, sum(a.androidvv) 安卓VV,
+                          sum(a.iosad) IOSAD, sum(b.iosuv) IOSUV, sum(a.iosvv) IOSVV,
+                          sum(a.inad+a.outad+a.mad+a.androidad+a.iosad) 全站AD, sum(b.alluv) 全站UV,
+                          sum(a.invv+a.outvv+a.mvv+a.androidvv+a.iosvv) 全站VV
                           from(
                             select cid,sum(inad) inad,sum(invv) invv,sum(outad) outad,sum(outvv) outvv,
                             sum(mad) mad,sum(mvv) mvv,sum(androidad) androidad,sum(androidvv) androidvv,sum(iosad) iosad,sum(iosvv) iosvv
@@ -106,7 +113,7 @@ class WebChaxunController extends WebController{
                           join (
                           select cid, inuv, outuv, muv, androiduv, iosuv, alluv from ciduv where cid in ({$strCid}) {$sqlStaticCondition}
                           )b
-                          on a.cid=b.cid ";
+                          on a.cid=b.cid group by a.cid";
             }
 
             if(isset($sql)){
