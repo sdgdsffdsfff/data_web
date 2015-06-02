@@ -82,7 +82,7 @@
                                         <form id="faseQueryForm_2" action="/web/chaxun/url" method="post">
                                             <div class="box-body form-horizontal">
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label text-right">refer：</label>
+                                                    <label class="col-sm-3 control-label text-right">url：</label>
                                                     <div class="col-sm-4">
                                                         <input type="text" class="form-control" value="<?=(isset($_POST['url'])&&$_POST['url']&&$_POST['search_type']==2)?$_POST['url']:''?>" name="url" placeholder="请输入一个模糊url" >
 
