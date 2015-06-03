@@ -31,4 +31,4 @@ phpunit.phar
 /phpunit.xml
 
 
-/configs/main.php
+/configs
