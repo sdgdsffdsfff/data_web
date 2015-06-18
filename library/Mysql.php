@@ -106,7 +106,8 @@ class Mysql
 	{
 		if (!extension_loaded('mysql'))
 		{
-			$this->error = 'Can	not	find mysql extension.';
+			$this->_error = 'Can not find mysql extension.';
+            throw new Exception($this->_error);
 		}
 
 		$func =	($params['persistent'])	? 'mysql_pconnect' : 'mysql_connect';
@@ -123,10 +124,10 @@ class Mysql
 			$this->query('SET NAMES	"' . $this->_config['charset'] . '";');
 			return $this->_connection;
 		}else{
-			echo "mysql cannot connect";
+            $this->_error = "Can not connect to Mysql server.";
+            throw new Exception($this->_error);
 		}
 
-		return $this->error();
 	}
 
 
