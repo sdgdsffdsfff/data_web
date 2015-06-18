@@ -100,13 +100,16 @@ EOF;
     }
 
     public function getGoldAmountCount($ge_date, $le_date){
+        $le_date = $le_date." 23:59:59";
         $sql = <<<EOF
             select date(a.create_time),sum(a.gold_amount)
             from avcp_work.avcp_pay_order_log a
             where a.create_time>='{$ge_date}'
+            and a.create_time<='{$le_date}'
             and a.result=0
             and a.type=4
             group by 1
+            order by 1;
 EOF;
 
         return $this->_db->query($sql)->fetchAllArray();

@@ -31,6 +31,12 @@
                                                 <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                                             </div>
                                         </div>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="<?=(isset($_POST['le_date'])&&$_POST['le_date'])?$_POST['le_date']:''?>" name="le_date" format="yyyy-MM-dd" placeholder="请选择结束日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,maxDate:'%y-%M-%d'});">
+                                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
 
                                     </div>
 
