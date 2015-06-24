@@ -96,7 +96,7 @@ EOF;
             )b
 	        on a.proxy_skyid=b.sky_id;
 EOF;
-        echo $sql;
+        //echo $sql;
         return $this->_db->query($sql)->fetchAllArray();
     }
 
