@@ -70,7 +70,7 @@
                                 <?php foreach($list as $item): ?>
                                 <tr>
                                     <?php foreach(array_values($item) as $v): ?>
-                                    <td><?=$v?></td>
+                                    <td style="max-width: 300px;overflow: auto;"><?=$v?></td>
                                     <?php endforeach; ?>
                                 </tr>
                                 <?php endforeach; ?>

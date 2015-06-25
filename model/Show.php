@@ -9,12 +9,12 @@ class ShowModel
         //$le_date = date("Y-m-d", time($le_date.' 00:00:00'));
         $le_date = $le_date." 23:59:59";
         $sql = <<<EOF
-            select date(a.create_time) as 日期, et as 注册来源, count(distinct a.sky_id) as 数量
+            select date(a.create_time) as 日期, count(distinct a.sky_id) as 数量
                 from avcp_work.avcp_user_info a
                 where a.create_time>='{$ge_date}'
 	            and a.create_time<='{$le_date}'
-                group by 1,2
-                order by 1,2;
+                group by 1
+                order by 1;
 EOF;
         return $this->_db->query($sql)->fetchAllArray();
     }
