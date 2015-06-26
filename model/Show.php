@@ -61,9 +61,9 @@ EOF;
         $le_date = $le_date." 23:59:59";
         $sql = <<<EOF
             select a.date as 日期,
-                proxy_skyid,
-                -- b.nick_name as 昵称,
-                -- id as 房间ID,
+                proxy_skyid as 主播ID,
+                b.nick_name as 主播昵称,
+                id as 房间ID,
                 reqcharge_user as 请求充值用户数,
                 round(reqcharge_amount, 2) as 请求金额,
                 succcharge_user as 成功用户数,
