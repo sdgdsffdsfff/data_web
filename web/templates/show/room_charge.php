@@ -58,26 +58,26 @@
                                 <input type="hidden" name="exportFileName" value="<?=$title?>">
                                 <button type="submit" class="btn btn-info btn-flat">导出EXCEL</button>
                             </form>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-responsive table-condensed table-striped">
+                                    <tbody>
 
-                            <table class="table table-bordered table-hover table-responsive table-condensed table-striped">
-                                <tbody>
-
-                                <tr class="active">
-                                    <?php foreach(array_keys($list[0]) as $th): ?>
-                                        <th><?=$th?></th>
-                                    <?php endforeach; ?>
-                                </tr>
-                                <?php foreach($list as $item): ?>
-                                    <tr>
-                                        <?php foreach(array_values($item) as $v): ?>
-                                            <td><?=$v?></td>
+                                    <tr class="active">
+                                        <?php foreach(array_keys($list[0]) as $th): ?>
+                                            <th><?=$th?></th>
                                         <?php endforeach; ?>
                                     </tr>
-                                <?php endforeach; ?>
+                                    <?php foreach($list as $item): ?>
+                                        <tr>
+                                            <?php foreach(array_values($item) as $v): ?>
+                                                <td><?=$v?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    <?php endforeach; ?>
 
-                                </tbody>
-                            </table>
-
+                                    </tbody>
+                                </table>
+                            </div>
                         <?php endif; ?>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
