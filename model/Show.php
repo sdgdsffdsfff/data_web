@@ -38,9 +38,9 @@ EOF;
         $sql = <<<EOF
              SELECT date(create_time) as 日期,
 			        count(distinct sky_id) as 请求充值用户数,
-			        round(sum(case when amount=0 or amount is null then real_amount else amount end)/-100.0, 2) as 请求金额,
-			        count(distinct case when result=0 and gold_amount>0 then sky_id else null end) as 成功用户数,
-			        round(sum(real_amount)/-100.0, 2) as 成功金额
+			        count(distinct case when result=0 and gold_amount>0 then sky_id else null end) as 成功充值用户数,
+			        round(sum(case when amount=0 or amount is null then real_amount else amount end)/-100.0, 2) as 请求充值金额,
+			        round(sum(real_amount)/-100.0, 2) as 成功充值金额
 			        FROM avcp_work.avcp_pay_order_log a
 	                left join (SELECT user_point
                                 FROM avcp_work.avcp_pay_rate where rate>0
@@ -65,9 +65,9 @@ EOF;
                 b.nick_name as 主播昵称,
                 id as 房间ID,
                 reqcharge_user as 请求充值用户数,
-                round(reqcharge_amount, 2) as 请求金额,
-                succcharge_user as 成功用户数,
-                round(succcharge_amount, 2) as 成功金额
+                succcharge_user as 充值成功用户数,
+                round(reqcharge_amount, 2) as 请求充值金额,
+                round(succcharge_amount, 2) as 成功充值金额
             from
             ( SELECT date(create_time),
                 proxy_skyid,
