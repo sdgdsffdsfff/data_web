@@ -14,34 +14,36 @@
                     <div class="box-body">
 
                         <a class="btn btn-primary" style="margin-bottom: 10px;" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i> 添加新用户</a>
-
-                        <table class="table table-bordered table-hover">
-                            <tr>
-                                <th>用户名</th>
-                                <th>昵称</th>
-                                <th>邮箱</th>
-                                <th>所属组</th>
-                                <th>最近登陆</th>
-                                <th>最后登陆IP</th>
-                                <th>权限</th>
-                                <th>操作</th>
-                            </tr>
-
-                            <?php foreach($list as $item): ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
                                 <tr>
-                                    <td><?=$item['name']?></td>
-                                    <td><?=$item['nickname']?></td>
-                                    <td><?=$item['email']?></td>
-                                    <td><?=$item['groupname']?></td>
-                                    <td><?=$item['lastlogin']?> </td>
-                                    <td><?=long2ip($item['lastloginip'])?></td>
-                                    <td><a href="<?=$SITE_PREFIX?>admin/modifyuser/id/<?=$item['id']?>">展示权限</a></td>
-                                    <td><a href="<?=$SITE_PREFIX?>admin/deluser?id=<?=$item['id']?>">删除</a></td>
+                                    <th>用户名</th>
+                                    <th>昵称</th>
+                                    <th>邮箱</th>
+                                    <th>所属组</th>
+                                    <th>最近登陆</th>
+                                    <th>最后登陆IP</th>
+                                    <th>权限</th>
+                                    <th>操作</th>
                                 </tr>
 
-                            <?php endforeach; ?>
+                                <?php foreach($list as $item): ?>
+                                    <tr>
+                                        <td><?=$item['name']?></td>
+                                        <td><?=$item['nickname']?></td>
+                                        <td><?=$item['email']?></td>
+                                        <td><?=$item['groupname']?></td>
+                                        <td><?=$item['lastlogin']?> </td>
+                                        <td><?=long2ip($item['lastloginip'])?></td>
+                                        <td><a href="<?=$SITE_PREFIX?>admin/modifyuser/id/<?=$item['id']?>">展示权限</a></td>
+                                        <td><a href="<?=$SITE_PREFIX?>admin/deluser?id=<?=$item['id']?>">删除</a></td>
+                                    </tr>
 
-                        </table>
+                                <?php endforeach; ?>
+
+                            </table>
+                        </div>
+
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
 
