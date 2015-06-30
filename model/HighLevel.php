@@ -58,7 +58,8 @@ class HighLevelModel
             'topic.ku6.com',
             'ishow.ku6.com',
             'm.ku6.com',
-            'boke.ku6.com'
+            'boke.ku6.com',
+            'show.ku6.com'
             )
             ORDER BY stat_date DESC, pv DESC
 EOF;
