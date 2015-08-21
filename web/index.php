@@ -40,7 +40,7 @@ $app->configureMode('development', function() use($app){
 
 //使用 \Slim\Middleware\SessionCookie 中间件把会话数据储存到经过加密和散列的 HTTP cookies中
 $app->add(new \Slim\Middleware\SessionCookie(array(
-    'expires' => '20 minutes',
+    'expires' => '10 hours',
     'path' => '/',
     'domain' => DOMAIN,
     'secure' => false,
@@ -60,7 +60,7 @@ $app->hook('slim.before.dispatch', function() use($app){
         || !isset($_SESSION['token'])
         || !isset($_SESSION['url'])
         || !isset($_SESSION['report_ids'])){
-        return $app->redirect(SITE_PREFIX . 'login');
+        return $app->redirect(SITE_PREFIX . 'login?redirectUrl='.base64_encode($_SERVER['REQUEST_URI']));
     }
     $url = substr($app->request()->getPath(), strlen(SITE_PREFIX));
     if($url == "admin/welcome") return true;

@@ -22,6 +22,9 @@
             </div>
             <div class="form-group">
                 <input type="password" name="password" class="form-control" placeholder="密码"/>
+                <?php if(isset($_GET['redirectUrl'])): ?>
+                <input type="hidden" name="redirectUrl" value="<?=$_GET['redirectUrl']?>">
+                <?php endif; ?>
             </div>
         </div>
         <div class="footer">

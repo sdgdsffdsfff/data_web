@@ -23,6 +23,7 @@ class WebAdminController extends WebController{
         $email = $this->_app->request()->post("email");
         $password = $this->_app->request()->post("password");
         $ip = $this->_app->request()->getIp();
+        $redirectUrl = $this->_app->request()->post("redirectUrl");
 
         if($email && $password){
             if(!strpos($email, "@ku6.com")){
@@ -30,7 +31,11 @@ class WebAdminController extends WebController{
                 return $this->_app->redirect(SITE_PREFIX . 'login');
             }
             if($this->login($email, $password, $ip)){
-                $this->_app->redirect(SITE_PREFIX . 'admin/welcome');
+                if(!empty($redirectUrl)){
+                    $this->_app->redirect(base64_decode($redirectUrl));
+                }else{
+                    $this->_app->redirect(SITE_PREFIX . 'admin/welcome');
+                }
             } else {
                 $_SESSION['errmsg'] = '登录失败';
                 $this->_app->redirect(SITE_PREFIX . 'login');
